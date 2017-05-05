@@ -1,4 +1,6 @@
 	<?php $post = $this->requestAction('/app/new_right');?>
+	<?php $bussiness = $this->requestAction('/app/bussiness');?>
+	 <?php $supporter = $this->requestAction('/app/supporter');?>
 <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
 	<aside>
 		<div class="panel panel-info">
@@ -16,9 +18,20 @@
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 full-width">
 					<div class="blog">
 						<div class="blog-img">
-							<img src="<?php echo $item['Post']['thumbnail']; ?>" class="img-responsive" alt="Image">
+							<img src="<?php echo $item['Post']['thumbnail']; ?>" class="img-responsive" alt="<?php echo $item['Post']['title']; ?>">
 						</div>
-						<div class="blog-title"><p><a href=""><?php echo $item['Post']['title']; ?></a></p></div>
+						<div class="blog-title"><p>
+						<?php echo $this->Html->link(
+										$item['Post']['title'],array(
+											'controller' => 'posts',
+											'action' => 'view',$item['Post']['id']
+										),
+										array(
+											'title' => $item['Post']['title'],
+											'escape' => false
+										)
+									);?>
+						</p></div>
 					</div>
 					<hr class="small-hr">
 				</div>
@@ -27,7 +40,18 @@
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12  full-width">
 						<div class="blog">
 
-							<div class="blog-title"><p><i class="fa fa-file-text-o" aria-hidden="true"></i>  <a href=""><?php echo $item['Post']['title']; ?></a></p></div>
+							<div class="blog-title"><p><i class="fa fa-file-text-o" aria-hidden="true"></i> 
+							 <?php echo $this->Html->link(
+										$item['Post']['title'],array(
+											'controller' => 'posts',
+											'action' => 'view',$item['Post']['id']
+										),
+										array(
+											'title' => $item['Post']['title'],
+											'escape' => false
+										)
+									);?>
+							 </p></div>
 						</div>
 						<hr class="small-hr">
 					</div>
@@ -44,25 +68,27 @@
 			<h3 class="panel-title">Hỗ trợ trực tuyến</h3>
 		</div>
 		<div class="panel-body">
+			<?php foreach($supporter as $item):?>
+			<?php if($item['Supporter']['status']==1):?>
 			<div class="support col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+				<hr class="small-hr">
 				<img src="/theme/Truck/img/support-1.png" alt="" class="img-responsive" width="15%" style="    float: left;">
-				<span class="phone-support"><a href="tel:0987789697">0987789697</a> (Mr.John)</span>
-				<span class="gmail-support"><a href="mailto:">john@gmail.com</a></span>		
+
+				<span class="phone-support"><a href="tel:<?php echo $item['Supporter']['hotline'];?>"><?php echo $item['Supporter']['hotline'];?></a> (<?php echo $item['Supporter']['name'];?>)</span>
+
+				<span class="gmail-support"><a href="mailto:<?php echo $item['Supporter']['email'];?>"><?php echo $item['Supporter']['email'];?></a></span>		
 			</div>
-				
-			<div class="support col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-					<hr class="small-hr">
-				<img src="/theme/Truck/img/support-1.png" alt="" class="img-responsive" width="15%" style="    float: left;">
-				<span class="phone-support"><a href="tel:0987789697">0987789697</a> (Mr.John)</span>
-				<span class="gmail-support"><a href="mailto:">john@gmail.com</a></span>	
-			</div>
+			<br>
+			<?php endif;?>
+		<?php endforeach;?>
+			
 		</div>
 	</div>
 	</aside>
 	<aside>
 	<div class="panel panel-info">
 		<div class="fb-page"
-		data-href="https://www.facebook.com/congnghethongtin2013/" 
+		data-href="<?php echo $bussiness['fanpage'];?>" 
 		data-width="340"
 		data-hide-cover="false"
 		data-show-facepile="true"></div>

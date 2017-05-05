@@ -22,7 +22,7 @@
 			data:[],
 			extfield:[],//{title:"column name",key:"",type:"input"}
 			nodeaddEnable:true,
-			maxlevel:4,
+			maxlevel:2,
 			nodeaddCallback:function(data,callback){},
 			noderemoveCallback:function(data,callback){},
 			nodeupdateCallback:function(data,callback){},
@@ -67,11 +67,9 @@
         element.append(dom_table);
         /*delegate click event*/
         element.delegate(".j-expend","click",function(event){
-        	//点击输入框不触发展开式事件
         	if(event.target.classList[0]=="fa"){
         		var treenode = treeData[$(this).attr('data-id')];
 	        	toggleicon($(this));
-	        	/*如果数据已经加载过，则只切换显示状态*/
 	        	if($(this).parent().attr('data-loaded')){
 	        		toggleExpendStatus($(this),treenode);        		
 	        	}
@@ -88,7 +86,6 @@
         });
         /*delegate remove event*/
         element.delegate(".j-remove","click",function(event){
-        	//TODO:需要判断是否存在子节点，存在则不允许删除
             var parentDom = $(this).parents(".class-level-ul");
             var isRemoveAble = false;
             if(parentDom.attr("data-loaded")=="true"){
@@ -101,7 +98,6 @@
                 }
             }
             else{
-                //如果是新增加的节点则设置成可删除否则需要展开再删除
                 if(parentDom.attr("data-id")){
                     var existChild = false;
                     for(var i=0;i<settings.data.length;i++){
@@ -124,7 +120,6 @@
             }
             if(isRemoveAble){
                 var that = $(this);
-                //删除确认
                 if(settings.customconfirm(settings.text.NodeDeleteText)){
                     /*trigger remove callback*/
                     settings.noderemoveCallback(that.parents(".class-level-ul").attr("data-id"),function(){
@@ -152,16 +147,13 @@
             }
         	     	
         });
-        /*焦点事件*/
         element.delegate(".form-control","focus",function(){
-            //在blur事件里如果输入内容为空会添加has-error样式
             $(this).parent().removeClass("has-error");
         });
         /*delegate lose focus event*/
         element.delegate(".form-control","blur",function(){
             var curElement = $(this);
             var data = {};
-            /*代码里用了太多的parent的方式需要重构一下*/
             data.id = curElement.parent().parent().attr("data-id");
             var parentUl = curElement.closest(".class-level-ul");
             data.pid = parentUl.attr("data-pid");
@@ -189,7 +181,6 @@
                 
             }
         });
-		/*渲染表头*/
         function renderHeader(_dom_header){
         	var dom_row = $('<div></div>');
         	dom_row.append($("<span class='maintitle'></span>").text(settings.maintitle));
@@ -199,10 +190,10 @@
     			var column = settings.extfield[j];    			
     			$("<span></span>").css("min-width","166px").text(column.title).appendTo(dom_row);
     		}
-    		dom_row.append($("<span class='textalign-center'>Operation</span>")); 
+            //Operation
+    		//    dom_row.append($("<span class='textalign-center'></span>")); 
     		_dom_header.append(dom_row);
         }
-        //动态生成扩展字段
         function generateColumn(row,extfield){
         	var generatedCol;
         	switch(extfield.type){
@@ -233,15 +224,12 @@
 		function collapseNode(){
 
 		}
-		/*展开节点*/
 		function expendNode(){
 
 		}
-		/*加载子节点*/
 		function loadNode(loadElement,parentNode){
 			var curElement = loadElement.parent().parent();
-        	var curLevel = loadElement.parent().attr("data-level")-0+1; 
-        	//TODO:将已经加载过的数据从list中删除，减少循环次数
+        	var curLevel = loadElement.parent().attr("data-level")-0+1;
         	if(parentNode&&parentNode.id){
                 for(var i=0;i<settings.data.length;i++){
     	        	var row = settings.data[i];
@@ -256,10 +244,6 @@
             loadElement.parent().attr('data-loaded',true);
 	        
 		}
-        /*初始化需要生成的下级节点的 params:
-        curElement当前节点，
-        row对应行数据，
-        curLevel以及当前层级*/
         function generateTreeNode(curElement,row,curLevel,isPrepend){
             var dom_row = $('<div class="class-level class-level-'+curLevel+'"></div>');
             var dom_ul =$('<ul class="class-level-ul"></ul>');
@@ -278,7 +262,7 @@
                     $("<li></li>").attr("data-id",row.id).appendTo(dom_ul);
                 }
                 else{
-                    $("<li></li>").append($('<button class="btn btn-outline btn-sm j-addChild"><i class="fa fa-plus"></i>'+language.addchild +'</button>').attr("data-id",row.id)).appendTo(dom_ul);    
+                    $("<li></li>").append($('<button class="btn btn-outline btn-sm j-addChild" style="margin-right:30px;"><i class="fa fa-plus"></i>'+language.addchild +'</button>').attr("data-id",row.id)).appendTo(dom_ul);    
                 }
                 
             }       

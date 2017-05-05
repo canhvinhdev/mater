@@ -25,10 +25,11 @@ class PostsController extends AppController {
  * @return void
  */
 	public function list_new($id=null) {
+		$count=$this->bussiness();
 		$this->Post->recursive = 0;
 		$this->Paginator->settings = array(
 			'conditions' => array('Post.category_id' => $id,'Post.publish' => 1),
-			'limit'=>6
+			'limit'=>$count['number_product']-1
 			
 		);
 		$this->set('posts',$this->Paginator->paginate());
@@ -59,6 +60,7 @@ class PostsController extends AppController {
 		    $this->request->data['Post']['user_id']=$user_id['id'];
 			//date_default_timezone_set('Asia/Ha_Noi');
 			 $this->request->data['Post']['created']=strtotime(date('Y-m-d H:i:s'));
+			  $this->request->data['Post']['slug']=$this->Tool->slug($this->request->data['Post']['slug']);
 			if ($this->Post->save($this->request->data)) {
 				$this->Session->setFlash(__('The post has been saved.'));
 				return $this->redirect(array('action' => 'admin_list_post'));
@@ -85,6 +87,7 @@ class PostsController extends AppController {
 		}
 
 		if ($this->request->is(array('post', 'put'))) {
+			 $this->request->data['Post']['slug']=$this->Tool->slug($this->request->data['Post']['slug']);
 			if ($this->Post->save($this->request->data)) {
 				$this->Session->setFlash(__('The post has been saved.'));
 				return $this->redirect(array('action' => 'admin_list_post'));
@@ -94,10 +97,11 @@ class PostsController extends AppController {
 		} else {
 			$options = array('conditions' => array('Post.' . $this->Post->primaryKey => $id));
 			$this->request->data = $this->Post->find('first', $options);
+			$categories = $this->Post->Category->find('list');
+			$users = $this->Post->User->find('list');
+			$this->set(compact('categories', 'users'));
 		}
-		$categories = $this->Post->Category->find('list');
-		$users = $this->Post->User->find('list');
-		$this->set(compact('categories', 'users'));
+		
 	}
 
 /**

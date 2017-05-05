@@ -73,10 +73,17 @@
 							
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center;">
 								<ul class="pagination">
-								<li><a href="#">&laquo;</a></li>
-								<li><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">&raquo;</a></li>
+								<?php 
+										echo $this->Paginator->prev('Trước', array(
+											        'tag'=>'li',
+											        'disabledTag'=>'a'
+     												 ));
+										echo $this->Paginator->numbers(array('tag'=>'li','separator' => '', 'currentTag' => 'a', 'currentClass' => 'active',  'modulus' => 5));
+										echo $this->Paginator->next('Sau', array(
+																	        'tag'=>'li',
+																	        'disabledTag'=>'a'
+						     												 ));
+						 		?> 
 							</ul>
 							
 							</div>

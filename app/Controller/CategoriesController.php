@@ -47,7 +47,9 @@ class CategoriesController extends AppController {
  */
 	public function add() {
 		if ($this->request->is('post')) {
+
 			$this->Category->create();
+			$this->request->data['Category']['slug']=$this->Tool->slug($this->request->data['Category']['slug']);
 			if ($this->Category->save($this->request->data)) {
 				$this->Session->setFlash(__('The category has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -69,6 +71,7 @@ class CategoriesController extends AppController {
 			throw new NotFoundException(__('Invalid category'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+			$this->request->data['Category']['slug']=$this->Tool->slug($this->request->data['Category']['slug']);
 			if ($this->Category->save($this->request->data)) {
 				$this->Session->setFlash(__('The category has been saved.'));
 				return $this->redirect(array('action' => 'admin_list_category_post'));
@@ -104,7 +107,7 @@ class CategoriesController extends AppController {
 	public function admin_list_category_post(){
 		$this->Category->recursive = 0;
 		$this->Paginator->settings = array(
-			'conditions' => array('Category.type' => 1,'Category.publish' => 1),
+			'conditions' => array('Category.type' => 1),
 			'limit'=>9
 			
 		);
@@ -114,6 +117,7 @@ class CategoriesController extends AppController {
 
 		if ($this->request->is('post')) {
 			$this->Category->create();
+			$this->request->data['Category']['slug']=$this->Tool->slug($this->request->data['Category']['slug']);
 			$this->request->data['Category']['type']=1;
 			date_default_timezone_set('Asia/Ha_Noi');
 			$this->request->data['Category']['created']=strtotime(date('Y-m-d H:i:s'));
@@ -130,7 +134,7 @@ class CategoriesController extends AppController {
 	public function admin_list_category_product(){
 		$this->Category->recursive = 0;
 		$this->Paginator->settings = array(
-			'conditions' => array('Category.type' => 0,'Category.publish' => 1),
+			'conditions' => array('Category.type' => 0),
 			'limit'=>9
 			
 		);
@@ -140,6 +144,7 @@ class CategoriesController extends AppController {
 
 		if ($this->request->is('post')) {
 			$this->Category->create();
+			$this->request->data['Category']['slug']=$this->Tool->slug($this->request->data['Category']['slug']);
 			$this->request->data['Category']['type']=0;
 			date_default_timezone_set('Asia/Ha_Noi');
 			$this->request->data['Category']['created']=strtotime(date('Y-m-d H:i:s'));
@@ -168,6 +173,7 @@ class CategoriesController extends AppController {
 			throw new NotFoundException(__('Invalid category'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+			$this->request->data['Category']['slug']=$this->Tool->slug($this->request->data['Category']['slug']);
 			if ($this->Category->save($this->request->data)) {
 				$this->Session->setFlash(__('The category has been saved.'));
 				return $this->redirect(array('action' => 'admin_list_category_product'));

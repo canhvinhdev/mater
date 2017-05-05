@@ -32,6 +32,8 @@
 	<?php echo $this->Html->script('/assets/js/bootstrap.min'); ?>
 	<?php echo $this->Html->script('/assets/js/notify.min'); ?>
 	
+<?php echo $this->Html->script('/assets/js/jquery.edittreetable'); ?>
+	
 
 </head>
 <body class="no-skin">
@@ -54,7 +56,6 @@
 <!--[if !IE]> -->
 
 <?php echo $this->Html->script('/plugins/datatables/jquery.dataTables.min'); ?>
-<?php echo $this->Html->script('/assets/js/jquery.edittreetable'); ?>
 <?php echo $this->Html->script('/assets/js/duplicateFields'); ?>
 <script  type="text/javascript">
 
@@ -62,81 +63,14 @@
             "class_remove": ".remove-this-field",
             "class_create": ".create-new-field"
         });
+        $('#additional-field-model1').duplicateElement({
+            "class_remove": ".remove-this-field",
+            "class_create": ".create-new-field"
+        });
+
 
 </script>
-<script type="text/javascript">
-	var data = [{
-		id:1,name:"JavaScript",pid:0, innercode: 44444
-	},
-	{
-		id:2,name:"jQuery",pid:0
-	},
-	{
-		id:6,name:"ReactJS",pid:0
-	},
-	{
-		id:4,name:"AngularJS",pid:0
-	},
-	{
-		id:5,name:"Zepto",pid:0
-	},
-	{
-		id:3,name:"PHP",pid:0
-	},
-	{
-		id:7,name:"jQuery",pid:2
 
-	},
-	{
-		id:8,name:"jQuery",pid:2
-
-	}
-	];
-	
-	$("#bs-treeetable").bstreetable({
-		data:data,
-		maintitle:"My skills",
-		nodeaddCallback:function(data,callback){
-			//alert(JSON.stringify(data));
-			//do your things then callback 新增的时候会返回一个字段叫pinnercode,表示父节点的innercode
-			callback({id:18,name:data.name,innercode:data.innercode,pid:data.pid});
-		},
-		noderemoveCallback:function(data,callback){
-			//alert(JSON.stringify(data));
-			//do your things then callback
-			callback();
-		},
-		nodeupdateCallback:function(data,callback){
-			//alert(JSON.stringify(data));
-			//do your things then callback
-			callback();
-		}
-	}
-	);
-
-	$("#bs-ml-treetable").bstreetable({
-		data:data,
-		maintitle:"Tên trường",
-		nodeaddCallback:function(data,callback){
-			//alert(JSON.stringify(data));
-			
-			callback({id:18,name:data.name,innercode:data.innercode,pid:data.pid});
-		},
-		noderemoveCallback:function(data,callback){
-			//alert(JSON.stringify(data));
-			//do your things then callback
-			callback();
-		},
-		nodeupdateCallback:function(data,callback){
-			//alert(JSON.stringify(data));
-			//do your things then callback
-			callback();
-		},
-		extfield:[
-		{title:"innercode",key:"innercode",type:"input"}
-		]
-	})
-</script>
 
 
 

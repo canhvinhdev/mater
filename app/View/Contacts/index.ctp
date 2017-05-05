@@ -1,14 +1,15 @@
+<?php $bussiness = $this->requestAction('/app/bussiness');?>
 <div id="content-1">
 			<div class="container full-width">
 				<div class="row">
 					 <?php echo $this->Element('new_right'); ?>
 					<div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
 						<h2>Thông tin liên hệ</h2>
+						<?php if($bussiness['map_status']==1):?>
 						<div class="maps-contact">
-									<p></p>
-									<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.620271782319!2d105.82162411404002!3d21.007853393869613!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x9c7032b815901df8!2zTmhhzIAgc2HMgWNoIFRpw6rMgG4gUGhvbmcgVGjhu6d5IEzhu6Np!5e0!3m2!1svi!2s!4v1492708644232" width="100%" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
-								</div>	
-
+							<iframe src="<?php echo $bussiness['map']; ?>" width="100%" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
+						</div>	
+						<?php endif;?>
 						<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 						
 							<div id="form-contact">
@@ -57,28 +58,28 @@
 							<div class="widget-wrapper ">
 								<div id="logo-footer-1" >
 									<a href="" >
-										<h3 style="color: red">Công ty THHH REALINE</h3>
+										<h3 style="color: red"><?php echo $bussiness['company']; ?></h3>
 									</a>
 								</div>
 								<div class="inner about_us">
 									<ul class="list-unstyled">
 										<li>
-											<i class="fa fa-home"></i> Hà Nội: 175, Tây Sơn Đống Đa. <br><i class="fa fa-home"></i> Hà Nội: 175, Tây Sơn Đống Đa.<br><i class="fa fa-home"></i> Hà Nội: 175, Tây Sơn Đống Đa.
+											<i class="fa fa-home"></i> <?php echo $bussiness['company_address']; ?>. 
 										</li>
 
 
 										<li>
-											<i class="fa fa-envelope-o"></i>  <a href="mailto:cskh@gmail.vn">  cskh@gmail.vn</a>
+											<i class="fa fa-envelope-o"></i>  <a href="mailto:<?php echo $bussiness['company_email']; ?>">  <?php echo $bussiness['company_email']; ?></a>
 										</li>
 
 
 										<li>
-											<i class="fa fa-phone"></i>  Hà Nội: 097789697
+											<i class="fa fa-phone"></i> <?php echo $bussiness['company_phone']; ?>
 										</li>
 
 
 										<li>
-											<i class="fa fa-print"></i>  HCM:  097789697
+											<i class="fa fa-print"></i> <?php echo $bussiness['company_fax']; ?>
 										</li>
 
 									</ul>

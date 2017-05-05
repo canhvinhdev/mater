@@ -309,6 +309,22 @@
 																<?php echo $this->Form->input('title.',array('placeholder'=>'Nhập tiêu đề','required'=>false)); ?>
 															</div>
 														</div>
+														
+														<div class="col-md-6 col-sm-12">
+															<label class="col-md-12 " for="field-a">Đường dẫn ảnh</label>
+															<div class="input-group">
+																<?php echo $this->Form->input('image.', array('type' => 'file', 'multiple','class'=>'form-control input-md','required'=>false)); ?>
+																
+															</div>
+														</div>
+														<div class="col-md-2 col-xs-5">
+															<label class="col-md-12 " for="field-b">Tiêu đề ảnh</label>
+															<div class="input-group">
+																<?php echo $this->Form->input('title.',array('placeholder'=>'Nhập tiêu đề','required'=>false)); ?>
+															</div>
+														</div>
+														
+
 														<div class="col-md-4 col-xs-7 text-right">
 															<label class="col-xs-12 control-label" for="field-c"><br /></label>
 															<a href="javascript:void(0);"  class="btn btn-warning remove-this-field">
@@ -322,7 +338,10 @@
 														</div>
 														
 													</div>
+
+
 												</fieldset>
+
 												<br />
 
 									
@@ -422,13 +441,15 @@
 
 </div>
 <script type="text/javascript">
-	 var data = [//{
-	// 	id:1,name:"JavaScript",pid:0, innercode: 44444
-	 //}
+	
+	var data= [];
 
-	];
+	<?php foreach($picture as $item):?>
+		data.push({id:<?php echo $item['id'];?>,name:<?php echo $item['name'];?>,pid:<?php echo $item['pid'];?>,innercode:<?php echo $item['innercode'];?>});
+	<?php endforeach;?>
+
 	var data1=[];
-	var dem=<?php echo (isset($technique)) ? $technique : 1;	?>;
+	var dem=<?php echo $technique;?>;
 
 
 	$("#bs-ml-treetable").bstreetable({
@@ -447,7 +468,7 @@
 		nodeupdateCallback:function(data,callback){
 			data1.push(data);
 			$("#techniques").val(JSON.stringify(data1));
-			//alert(JSON.stringify(data1));
+			alert(JSON.stringify(data1));
 			//do your things then callback
 			callback();
 		},

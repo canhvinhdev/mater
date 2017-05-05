@@ -43,7 +43,7 @@
 									</div>
 							
 									<div class="descripton-blog">
-										<?php echo $item['Post']['description'];?>
+										<?php echo $this->Tool->substr($item['Post']['description'], 0, 185);?>
 									</div>		
 									
 							

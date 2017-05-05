@@ -1,15 +1,17 @@
+        <?php $bussiness = $this->requestAction('/app/bussiness');?>
+
         <div class="container-fluid full-width">
 		    <div class="container">
 				<div class="row">
 					<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
 						<div id="logo">
-							<img src="/theme/Truck/img/logo.png" class="img-responsive" alt="">
+							<a href="/"><img src="<?php echo $bussiness['logo']; ?>" class="img-responsive" alt="Isuzu Always beside you"></a>
 						</div>
 					</div>	
 					<div class="col-xs-12 col-sm-4 col-md-6 col-lg-6">
 						<div id="contact">
 							<div id="header-text">
-								<strong><?php echo 'SLOGAN' ?></strong>
+								<strong><?php echo 'Isuzu Always beside you' ?></strong>
 							</div>
 							
 						</div>

@@ -35,6 +35,7 @@ App::uses('Folder', 'Utility');
  */
 class AppController extends Controller {
 	public $components = array(
+        'Tool',
         'RequestHandler',
         'Session',
         'DebugKit.Toolbar',
@@ -54,6 +55,7 @@ class AppController extends Controller {
 	public function beforeFilter()
     {
         //$this->Auth->allow();
+        //$this->bussiness();
     	if(isset($this->request->params['prefix']) && $this->request->params['prefix'] ==
             'admin') {
             $admin=$this->get_user(); 
@@ -75,10 +77,11 @@ class AppController extends Controller {
     }
     public function new_right(){
          $this->loadModel('Post');
+         $count=$this->bussiness();
          $menu = $this->Post->find('all',
                 array(
                     'conditions' => array('Post.publish' => 1),
-                    'limit' => 4,
+                    'limit' => $count['number_new'],
                     'order' => array('Post.created' => 'desc')
                 )
                 
@@ -116,18 +119,19 @@ class AppController extends Controller {
          $menu['products']=$products; 
          $menu['news']=$news;   
          return $menu;
-
-        // var_dump($menu); die();
     }
     public function UploadFile($folder,$model,$name){
         $allow_ext = array('jpg', 'png', 'jpeg','pjpeg','PNG');
        
         $file = new File($this->request->data[$model][$name]['tmp_name']);
         $arr = explode('.',$this->request->data[$model][$name]['name']);
+        $png = explode('/',$this->request->data[$model][$name]['type']);
         $ext = end($arr);
+        $png = end($png);
         if(in_array($ext, $allow_ext))
         {
-            $filename = $this->request->data[$model]['slug'].'.'.$ext;
+            $filename = $png.'_'.$this->request->data[$model]['link'].$arr[0].'.'.$ext;
+            
             if($file->copy(APP . 'webroot/uploads/' .$folder . '/' . $filename))
             {
                
@@ -151,4 +155,16 @@ class AppController extends Controller {
         }
         return $result;
     } 
+    public function bussiness(){
+        $this->loadModel('Bussiness');
+        $products = $this->Bussiness->find('all');
+        //pr($products);die();
+        return  $products[0]['Bussiness'];
+    }
+     public function supporter(){
+        $this->loadModel('Supporter');
+        $supporter = $this->Supporter->find('all');
+       // pr($supporter);die();
+        return  $supporter;
+    }
 }
