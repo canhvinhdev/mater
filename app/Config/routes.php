@@ -24,11 +24,38 @@
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
+	Router::parseExtensions('html', 'rss');
 	Router::connect('/', array('controller' => 'products', 'action' => 'home', 'admin' => false));
-	Router::connect('/contact', array('controller' => 'contacts', 'action' => 'index', 'admin' => false));
+	Router::connect('/lien-he', array('controller' => 'contacts', 'action' => 'index', 'admin' => false));
 	Router::connect('/gioi_thieu', array('controller' => 'introduces', 'action' => 'index', 'admin' => false));
-	Router::connect('/list_new/:id', array('controller' => 'posts', 'action' => 'list_new', 'admin' => false));
-	Router::connect('/list_product/:id', array('controller' => 'products', 'action' => 'list_product', 'admin' => false));
+
+	Router::connect('/tin-tuc-va-su-kien/:cate_slug-:id', array('controller' => 'posts', 'action' => 'list_new', 'admin' => false),
+		array(
+			'pass' => array('cate_slug', 'id'),
+			'id' => '[0-9]+'
+		)
+	);
+
+	Router::connect('/san-pham/:cate_slug-:id', array('controller' => 'products', 'action' => 'list_product', 'admin' => false),
+		array(
+			'pass' => array('cate_slug', 'id'),
+			'id' => '[0-9]+'
+		)
+	);
+	Router::connect('/tin-tuc-va-su-kien/:slug_cat/:slug_post-:id',
+		array('controller' => 'posts', 'action' => 'view', 'admin' => false),
+		array(
+			'pass' => array('slug_cat' ,'slug_post','id'),
+			'id' => '[0-9]+'
+		)
+	);
+	Router::connect('/san-pham/:slug_cat/:slug_post-:id',
+		array('controller' => 'products', 'action' => 'view', 'admin' => false),
+		array(
+			'pass' => array('slug_cat' ,'slug_post','id'),
+			'id' => '[0-9]+'
+		)
+	);
 
 
 

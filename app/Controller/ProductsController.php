@@ -35,12 +35,23 @@ class ProductsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
+	public function view($slug_cat= null,$slug_post= null,$id = null) {
+		//pr($id);die();
 		if (!$this->Product->exists($id)) {
 			throw new NotFoundException(__('Invalid product'));
 		}
 		$options = array('conditions' => array('Product.' . $this->Product->primaryKey => $id));
+		//pr($this->Product->find('first', $options));
 		$this->set('product', $this->Product->find('first', $options));
+		$truck = $this->Product->find('all',
+                array(
+                    'conditions' => array('Product.publish' => 1),
+                    'limit' => 4,
+                    'order' => array('Product.created' => 'desc')
+                ) );
+		$this->set('truck',$truck);
+		//$this->loadModel('Technique');
+
 	}
 
 /**
@@ -53,6 +64,7 @@ class ProductsController extends AppController {
 			//pr($this->request->data);die();
 
 			$this->Product->create();
+			$this->request->data['Product']['user_id']=$this->get_user()['User']['id'];
 			$this->request->data['Product']['slug']=$this->Tool->slug($this->request->data['Product']['slug']);
 			$this->Product->save($this->request->data);
 			
@@ -234,7 +246,7 @@ class ProductsController extends AppController {
 		}
 		return $this->redirect(array('action' => 'admin_list_product'));
 	}
-	public function list_product($id=null){
+	public function list_product($cate_id=null,$id=null){
 		$count=$this->bussiness();
 		$this->Product->recursive = 0;
 		$this->Paginator->settings = array(

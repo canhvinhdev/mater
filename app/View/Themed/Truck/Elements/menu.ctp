@@ -15,20 +15,45 @@
 							<div class="">
 								<ul class="nav navbar-nav">
 									<li><a href="/">Trang chủ</a></li>
-									<li><a href="#news">Giới thiệu</a></li>
+									<li><a href="/gioi_thieu">Giới thiệu</a></li>
 									<li class="dropdown">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown">Xe đang bán <b class="caret"></b></a>
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown">Hãng xe<b class="caret"></b></a>
 										<ul class="dropdown-menu">
-											<li><a href="#">Loại xe đang bán 1</a>
-											</li>			
-											<li><a href="#">Loại xe đang bán 1</a></li>			
-											<li><a href="#">Loại xe đang bán 1</a></li>			
-											<li><a href="#">Loại xe đang bán 1</a></li>			
-											<li><a href="#">Loại xe đang bán 1</a></li>							
+											<?php
+												if(isset($menu['products'])):
+													  foreach($menu['products'] as $item):
+
+												?>						
+													<li>
+													<a href="<?php echo '/san-pham/'.$item['Category']['slug'].'-'.$item['Category']['id']; ?>"> <?php echo $item['Category']['name'];?></a>
+														<!-- <ul class="sup-menu-1">			
+															<li><a href="#">Loại xe đang bán 2</a></li>	
+														</ul> -->
+													</li>		
+												<?php  endforeach;
+													   endif;
+											?>							
 										</ul>
 									</li>
-									<li><a href="#about">Liên hệ</a></li>
-									<li><a href="#about">Tin tức và sự kiện</a></li>
+									<li>
+										<a href="" class="dropdown-toggle" data-toggle="dropdown">Tin tức và sự kiện<b class="caret"></b></a>
+										<ul class="dropdown-menu">	
+											<?php
+											if(isset($menu['news'])):
+												  foreach($menu['news'] as $item):
+
+											?>						
+												<li>
+												<a href="<?php echo '/tin-tuc-va-su-kien/'.$item['Category']['slug'].'-'.$item['Category']['id']; ?>"> <?php echo $item['Category']['name'];?></a>
+												
+												</li>		
+											<?php  endforeach;
+												   endif;
+											?>							
+										</ul>
+									</li>
+									<li><a href="/lien-he">Liên hệ</a></li>
+									
 								</ul>
 
 
@@ -78,7 +103,8 @@
 
 									?>						
 										<li>
-										<?php echo $this->Html->link($item['Category']['name'], array('controller'=>'products','action' => 'list_product',$item['Category']['id']), array('escape' => false)); ?>
+										<a href="<?php echo '/san-pham/'.$item['Category']['slug'].'-'.$item['Category']['id']; ?>"> <?php echo $item['Category']['name'];?></a>
+										
 											<!-- <ul class="sup-menu-1">			
 												<li><a href="#">Loại xe đang bán 2</a></li>	
 											</ul> -->
@@ -88,9 +114,7 @@
 									?>							
 									</ul>
 								</li>						
-								<li class="li_lv1">
-									<a href="/contact">Liên hệ</a>
-								</li>							
+														
 								<li class="li_lv1">
 									<a href="#">Tin tức và sự kiện</a>
 									<ul class="sup-menu">	
@@ -100,13 +124,17 @@
 
 									?>						
 										<li>
-										<?php echo $this->Html->link($item['Category']['name'], array('controller'=>'posts','action' => 'list_new',$item['Category']['id']), array('escape' => false)); ?>
+										<a href="<?php echo '/tin-tuc-va-su-kien/'.$item['Category']['slug'].'-'.$item['Category']['id']; ?>"> <?php echo $item['Category']['name'];?></a>
+										
 										
 										</li>		
 									<?php  endforeach;
 										   endif;
 									?>							
 									</ul>
+								</li>	
+								<li class="li_lv1">
+									<a href="/lien-he">Liên hệ</a>
 								</li>			
 								
 							</ul>

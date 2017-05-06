@@ -4,3 +4,6 @@
 	filemode = false
 	symlinks = false
 	ignorecase = true
+[remote "vinh"]
+	url = https://github.com/canhvinhdev/mater
+	fetch = +refs/heads/*:refs/remotes/vinh/*

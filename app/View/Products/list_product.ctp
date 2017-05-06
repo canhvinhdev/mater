@@ -17,21 +17,8 @@
 							?>	
 							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
 								<div class="thumbnail-section-car">
-								<?php 
-									$title = $item['Product']['name'];
-									$image = $this->Html->image($item['Product']['thumbnail'],array('alt'=> $title,'class'=>'thumbnail thumbnail-car img-responsive '));
-									echo $this->Html->link(
-										$image,array(
-											'controller' => 'products',
-											'action' => 'view',$item['Product']['id']
-										),
-										array(
-											'title' => $item['Product']['name'],
-											'escape' => false,
-											'class' => 'thumbnail thumbnail-car'
-										)
-
-									);?>
+								<a href="<?php echo '/san-pham/'.$item['Category']['slug'].'/'.$item['Product']['slug'].'-'.$item['Product']['id'].'.html';?>" title="<?php echo $item['Product']['name'];?>" class="thumbnail thumbnail-car"> <img src="<?php echo$item['Product']['thumbnail']; ?>" alt="<?php echo $item['Product']['name'];?>" class="thumbnail thumbnail-car img-responsive"> </a>
+								
 									<!-- <a href="#" class="thumbnail thumbnail-car">
 										<img data-src="" alt="" src="img/car-7.jpg">
 									</a> -->
@@ -51,16 +38,8 @@
 											<span>Giá: <span id="car-price"><?php echo $item['Product']['price'];?> triệu</span></span>
 										</div>
 										<div id="button-info-car">
-										<button type="button" class="btn btn-info">
-										<?php echo $this->Html->link(
-										'Xem chi tiết',array(
-											'controller' => 'products',
-											'action' => 'view',$item['Product']['id']
-										),
-										array(
-											'escape' => false
-										)
-									);?></button>
+											<a href="<?php echo '/san-pham/'.$item['Category']['slug'].'/'.$item['Product']['slug'].'-'.$item['Product']['id'].'.html';?>" title="<?php echo $item['Product']['name'];?>" ><button type="button" class="btn btn-info">Xem chi tiết</button></a>
+											
 											
 										</div>
 									</div>

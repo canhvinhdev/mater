@@ -8,7 +8,7 @@
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 full-width">
 								<div class="panel panel-info">
 									<div class="panel-heading">
-										<h3 class="panel-title">Tin khuyến mãi</h3>
+										<h3 class="panel-title"><?php echo $cate['name'];?></h3>
 									</div>
 								</div>
 							</div>
@@ -20,20 +20,11 @@
 							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 ">
 								<article>
 								<div id="post">
-									<a href=""><h3 id="title-post"><?php echo $item['Post']['title'];?>/</h3></a>		
-									<?php 
-									$title = $item['Post']['title'];
-									$image = $this->Html->image($item['Post']['thumbnail'],array('alt'=> $title,'class'=>'img-responsive'));
-									echo $this->Html->link(
-										$image,array(
-											'controller' => 'posts',
-											'action' => 'view',$item['Post']['id']
-										),
-										array(
-											'title' => $item['Post']['title'],
-											'escape' => false
-										)
-									);?>
+									<a href="<?php echo '/tin-tuc-va-su-kien/'.$item['Category']['slug'].'/'.$item['Post']['slug'].'-'.$item['Post']['id'].'.html';?>" title="<?php echo $item['Post']['title'];?>"><h3 id="title-post"> <?php echo $this->Tool->substr($item['Post']['title'], 0, 100); ?></h3></a>
+									<!-- <a href=""><h3 id="title-post"><?php echo $item['Post']['title'];?>/</h3></a>		 -->
+
+									<a href="<?php echo '/tin-tuc-va-su-kien/'.$item['Category']['slug'].'/'.$item['Post']['slug'].'-'.$item['Post']['id'].'.html';?>" title="<?php echo $item['Post']['title'];?>"><img src="<?php echo$item['Post']['thumbnail']; ?>" alt="<?php echo $item['Post']['title'];?>" class="img-responsive"></a>
+									
 									
 									
 									<div class="entry-meta-progression" >
@@ -43,7 +34,7 @@
 									</div>
 							
 									<div class="descripton-blog">
-										<?php echo $this->Tool->substr($item['Post']['description'], 0, 185);?>
+										<?php echo $this->Tool->substr($item['Post']['description'], 0, 182);?>
 									</div>		
 									
 							

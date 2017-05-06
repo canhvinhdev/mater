@@ -21,16 +21,8 @@
 							<img src="<?php echo $item['Post']['thumbnail']; ?>" class="img-responsive" alt="<?php echo $item['Post']['title']; ?>">
 						</div>
 						<div class="blog-title"><p>
-						<?php echo $this->Html->link(
-										$item['Post']['title'],array(
-											'controller' => 'posts',
-											'action' => 'view',$item['Post']['id']
-										),
-										array(
-											'title' => $item['Post']['title'],
-											'escape' => false
-										)
-									);?>
+						<a href="<?php echo '/tin-tuc-va-su-kien/'.$item['Category']['slug'].'/'.$item['Post']['slug'].'-'.$item['Post']['id'].'.html';?>" title="<?php echo $item['Post']['title'];?>"><?php echo $this->Tool->substr($item['Post']['title'], 0, 100); ?></a>
+						
 						</p></div>
 					</div>
 					<hr class="small-hr">
@@ -41,16 +33,7 @@
 						<div class="blog">
 
 							<div class="blog-title"><p><i class="fa fa-file-text-o" aria-hidden="true"></i> 
-							 <?php echo $this->Html->link(
-										$item['Post']['title'],array(
-											'controller' => 'posts',
-											'action' => 'view',$item['Post']['id']
-										),
-										array(
-											'title' => $item['Post']['title'],
-											'escape' => false
-										)
-									);?>
+							<a href="<?php echo '/tin-tuc-va-su-kien/'.$item['Category']['slug'].'/'.$item['Post']['slug'].'-'.$item['Post']['id'].'.html';?>" title="<?php echo $item['Post']['title'];?>"><?php echo $this->Tool->substr($item['Post']['title'], 0, 100); ?></a>
 							 </p></div>
 						</div>
 						<hr class="small-hr">

@@ -6,12 +6,15 @@
 	<!-- Latest compiled and minified CSS & JS -->
 
 	<?php echo $this->Html->css(array('bootstrap.min','style','detail','font-awesome.min')); ?>
-	<?php echo $this->Html->script(array('jquery-3.2.0.min','bootstrap.min')); ?>
+	<?php echo $this->Html->script(array('jquery-3.2.0.min','bootstrap.min','jquery-typeahead')); ?>
+
+
+
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 </head> 
 <body id="main-body">
-     <!-- <script type="text/javascript">
+    <script type="text/javascript">
         var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
         (function(){
         var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
@@ -21,7 +24,7 @@
         s1.setAttribute('crossorigin','*');
         s0.parentNode.insertBefore(s1,s0);
         })();
-        </script> -->
+        </script> 
         <!--End of Tawk.to Script-->
 
   <div id="fb-root"></div>
@@ -63,8 +66,6 @@
         }(document, 'script', 'facebook-jssdk'));
         </script>
         <div class="hisella-messages"><div class="hisella-messages-outer"><div id="hisella-minimize">Facebook chat</div><div id="hisella-facebook" class='fb-page' data-adapt-container-width='true' data-height='300' data-hide-cover='false' data-href='https://www.facebook.com/congnghethongtin2013/' data-show-facepile='true' data-show-posts='false' data-small-header='false' data-tabs='messages' data-width='250'></div></div></div>-->
-
-       <!--Start of Tawk.to Script-->
-       
+       <!--Start of Tawk.to Script-->   
 </body>
 </html>

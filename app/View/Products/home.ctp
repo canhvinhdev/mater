@@ -16,10 +16,22 @@
 								foreach ($product_new as $item): 
 							?>
 							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-								<div class="thumbnail-section-car">
-									<a href="#" class="thumbnail thumbnail-car">
-										<img data-src="" alt="" src="<?php echo $item['Product']['thumbnail']; ?>">
-									</a>
+								 <div class="thumbnail-section-car">
+									<?php 
+									$title = $item['Product']['name'];
+									$image = $this->Html->image($item['Product']['thumbnail'],array('alt'=> $title,'class'=>'thumbnail thumbnail-car img-responsive '));
+									echo $this->Html->link(
+										$image,array(
+											'controller' => 'products',
+											'action' => 'view',$item['Product']['id']
+										),
+										array(
+											'title' => $item['Product']['name'],
+											'escape' => false,
+											'class' => 'thumbnail thumbnail-car'
+										)
+
+									);?>
 									<div class="car-des">
 										<h4><?php echo $item['Product']['name']; ?></h4>
 										<div class="car-code">
@@ -36,7 +48,18 @@
 											<span>Giá: <span id="car-price"><?php echo $item['Product']['price']; ?> triệu</span></span>
 										</div>
 										<div id="button-info-car">
-											<button type="button" class="btn btn-info">Xem chi tiết</button>
+											<?php echo $this->Html->link(
+												'<button type="button" class="btn btn-info">Xem chi tiết</button>',array(
+													'controller' => 'products',
+													'action' => 'view',$item['Product']['id']
+												),
+												array(
+													'title' => $item['Product']['name'],
+													'escape' => false
+												)
+
+											);?>
+											
 										</div>
 
 

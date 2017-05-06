@@ -34,9 +34,7 @@
 									<?php echo $post['Post']['content'];?>
 								</div>
 							</div>
-						
-
-						</aside>
+						<div class="fb-comments" data-href="http://oto.com/posts/view/6" data-width="100%" data-numposts="5"></div>
 						
 					</div>
 					

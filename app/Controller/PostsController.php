@@ -24,7 +24,7 @@ class PostsController extends AppController {
  *
  * @return void
  */
-	public function list_new($id=null) {
+	public function list_new($cate_id=null,$id=null) {
 		$count=$this->bussiness();
 		$this->Post->recursive = 0;
 		$this->Paginator->settings = array(
@@ -32,7 +32,15 @@ class PostsController extends AppController {
 			'limit'=>$count['number_product']-1
 			
 		);
+
 		$this->set('posts',$this->Paginator->paginate());
+		$this->loadmodel('Category');
+		$cate= $this->Category->find('first', array(
+			'conditions'=>array('Category.id'=>$id),
+
+		));
+		$this->set('cate',$cate['Category']);
+
 	}
 
 /**
@@ -42,7 +50,7 @@ class PostsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
+	public function view($slug_cat= null,$slug_post= null,$id = null) {
 		$options = array('conditions' => array('Post.' . $this->Post->primaryKey => $id));
 		$this->set('post', $this->Post->find('first', $options));
 	}
@@ -71,6 +79,7 @@ class PostsController extends AppController {
 		$categories = $this->Post->Category->find('list');
 		$users = $this->Post->User->find('list');
 		$this->set(compact('categories', 'users'));
+
 	}
 
 /**
