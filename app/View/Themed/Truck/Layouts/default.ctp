@@ -13,16 +13,16 @@
         <meta property="og:description"   content="<?php echo $post['Post']['description'];?>" />
         <meta property="og:image"         content="<?php echo FULL_BASE_URL.$post['Post']['thumbnail'];?>" />
         <meta name="keywords"             content="<?php echo $post['Post']['meta_keyword'];?>" />
-        <meta name="description"                content="<?php echo FULL_BASE_URL.$post['Post']['meta_description '];?>" />
+        <meta name="description"                content="<?php echo FULL_BASE_URL.$post['Post']['meta_description'];?>" />
     <?php endif; ?>
      <?php if(isset($product)):?>
         <meta property="og:url"           content="<?php echo FULL_BASE_URL.'/'.$product['Product']['slug'].'-'.$product['Product']['id'];?>" />
         <meta property="og:type"          content="<?php echo FULL_BASE_URL.'/' ;?>" />
-        <meta property="og:title"         content="<?php echo $product['Product']['title'];?>" />
+        <meta property="og:title"         content="<?php echo $product['Product']['name'];?>" />
         <meta property="og:description"   content="<?php echo $product['Product']['description'];?>" />
         <meta property="og:image"         content="<?php echo FULL_BASE_URL.$product['Product']['thumbnail'];?>" />
         <meta name="keywords"             content="<?php echo $product['Product']['meta_keyword'];?>" />
-        <meta name="description"                content="<?php echo FULL_BASE_URL.$product['Product']['meta_description '];?>" />
+        <meta name="description"                content="<?php echo FULL_BASE_URL.$product['Product']['meta_description'];?>" />
     <?php endif; ?>
 	
 	<!-- Latest compiled and minified CSS & JS -->
