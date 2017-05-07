@@ -167,4 +167,15 @@ class AppController extends Controller {
        // pr($supporter);die();
         return  $supporter;
     }
+
+    function _setErrorLayout() {  
+       if ($this->name == 'CakeError') {
+            $this->theme='Truck';
+            $this->layout = 'error';  
+           
+       }    
+    }
+    function beforeRender () {  
+       $this->_setErrorLayout();
+    }
 }

@@ -1,5 +1,5 @@
-<?php $this->redirect(array('controller'=>'errors','action' => 'error404')); ?>
-<!--<?php
+<!-- <?php $this->redirect(array('controller'=>'errors','action' => 'error404')); ?> -->
+<!-- <?php
 
 /**
  *
@@ -40,4 +40,5 @@ class <?php //echo h($class . ' extends ' . $plugin); ?>AppController {
 	<?php //echo __d('cake_dev', 'If you want to customize this error message, create %s', APP_DIR . DS . 'View' . DS . 'Errors' . DS . 'missing_controller.ctp'); ?>
 </p>
 
-<?php //echo $this->element('exception_stack_trace'); ?>-->
+<?php //echo $this->element('exception_stack_trace'); ?>
+ -->
