@@ -23,6 +23,7 @@ class IntroducesController extends AppController {
 	public function index() {
 		$this->Introduce->recursive = 0;
 		$this->set('introduces', $this->Paginator->paginate());
+		 $this->set('title_for_layout', 'Giới Thiệu- Đại Lý Cấp Số 1 Isuzu Việt Nam');
 	}
 
 /**

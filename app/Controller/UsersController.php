@@ -25,7 +25,7 @@ public $components = array('Paginator');
 *
 * @return void
 */
-public function index() {
+public function admin_index() {
 	$this->User->recursive = 0;
 	$this->set('users', $this->Paginator->paginate());
 }
@@ -136,14 +136,15 @@ public function re_password($code = null)
 *
 * @return void
 */
-public function add() {
+public function admin_add() {
 	if ($this->request->is('post')) {
 		$this->User->create();
+		$this->request->data['User']['group_id']=1;
 		if ($this->User->save($this->request->data)) {
-			$this->Session->setFlash(__('The user has been saved.'));
-			return $this->redirect(array('action' => 'index'));
+			$this->Session->setFlash(__('Thêm người dùng thành công.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
+			return $this->redirect(array('action' => 'admin_index'));
 		} else {
-			$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+			$this->Session->setFlash(__('Thêm người dùng thất bại.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 		}
 	}
 	$groups = $this->User->Group->find('list');
@@ -157,16 +158,19 @@ public function add() {
 * @param string $id
 * @return void
 */
-public function edit($id = null) {
+public function admin_edit($id = null) {
 	if (!$this->User->exists($id)) {
+
 		throw new NotFoundException(__('Invalid user'));
 	}
 	if ($this->request->is(array('post', 'put'))) {
+		 $this->request->data['User']['group_id']=1;
+		 $this->request->data['User']['id']=$id;
 		if ($this->User->save($this->request->data)) {
-			$this->Session->setFlash(__('The user has been saved.'));
-			return $this->redirect(array('action' => 'index'));
+			$this->Session->setFlash(__('Sửa người dùng thành công.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
+			return $this->redirect(array('action' => 'admin_index'));
 		} else {
-			$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+			$this->Session->setFlash(__('Sửa người dùng thất bại.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 		}
 	} else {
 		$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
@@ -183,17 +187,17 @@ public function edit($id = null) {
 * @param string $id
 * @return void
 */
-public function delete($id = null) {
+public function admin_delete($id = null) {
 	$this->User->id = $id;
 	if (!$this->User->exists()) {
 		throw new NotFoundException(__('Invalid user'));
 	}
-	$this->request->allowMethod('post', 'delete');
 	if ($this->User->delete()) {
-		$this->Session->setFlash(__('The user has been deleted.'));
+		 $this->Session->setFlash(__('xóa người dùng thành công.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 	} else {
-		$this->Session->setFlash(__('The user could not be deleted. Please, try again.'));
+		 $this->Session->setFlash(__('xóa người dùng thất bại.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 	}
-	return $this->redirect(array('action' => 'index'));
+	return $this->redirect(array('action' => 'admin_index'));
 }
+
 }

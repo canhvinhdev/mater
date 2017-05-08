@@ -27,13 +27,14 @@
         <br />
     </div>
     <div class="row">
-        <div class="col-md-6">
-            <h2>Page Not Found</h2>
-            <img type="magin-left:30px;" src="/img/error-404.jpg" alt="Not found 404" title="Not found 404"  class="img-rounded"/>
-        </div>
-        <div class="col-md-6">
+      <div class="col-md-12 text-center">
             <a href="/" title="Home">Về Trang Chủ</a>
         </div>
+        <div class="col-md-12">
+     
+            <img type="magin-left:30px;" src="/img/error-404.png" alt="Not found 404" title="Not found 404"  class="img-rounded img-responsive"/>
+        </div>
+       
     </div>
   </div>
 

@@ -28,10 +28,15 @@
 							overflow: auto;
 							    margin-top: 45px;
    							 z-index: 999;
-   							 display: none;
+   							display: none;
+						}
+						#content-search ul{
+							padding: 0px 5px;
+
 						}
 						#content-search ul li{
 							/*//border-bottom: 1px dotted gray;*/
+	
 							list-style: none;
 							padding: 10px 0px;
 						}
@@ -39,22 +44,53 @@
 							
 							padding: 0px 5px;
 						}
+						.search-img{
+							width: 70px;
+							float: left;
+						}
 						/*.active-sear{
 							display: block !important;
 						}*/	
+
 					</style>
 					<script>
 						$(document).ready(function(){
+
 							$('#search-input').on('keyup', function(ev){
 								var a  = $("#search-input").val();
 								if(a=== ""){
 									$("#content-search").hide();
 								}else{
-									
 									$("#content-search").show();
+									$.ajax({
+										type:'post',
+										url: '/search',
+										data: {key: a},
+										beforeSend:function() {
+										},
+										success:function(data)
+										{	
+											$("#content-search").html(data);
+											//alert(data);
+										},
+										complete:function()
+										{
+											
+										},
+										error:function()
+										{
+			
+										}
+									});
 								}
 
 							});
+
+							
+
+						});
+						$( "#main-body" ).click(function() {
+						 	$("#content-search").hide();
 						});
 					</script>
 					<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
@@ -73,7 +109,7 @@
 						      </div>
 						    </form>
 							<div id="content-search">
-								<ul>
+								<!-- <ul>
 									<li><img src="https://www.w3schools.com/images/compatible_chrome.gif" alt="">Test 1</li>
 									<li><img src="https://www.w3schools.com/images/compatible_chrome.gif" alt="">Test 2</li>
 									<li><img src="https://www.w3schools.com/images/compatible_chrome.gif" alt="">Test 3</li>
@@ -84,7 +120,7 @@
 									<li><img src="https://www.w3schools.com/images/compatible_chrome.gif" alt="">Test 3</li>
 									<li><img src="https://www.w3schools.com/images/compatible_chrome.gif" alt="">Test 4</li>
 									<li><img src="https://www.w3schools.com/images/compatible_chrome.gif" alt="">Test 5</li>
-								</ul>
+								</ul> -->
 							</div>	
 						</div>
 					</div>

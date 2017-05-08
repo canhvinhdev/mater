@@ -56,7 +56,7 @@
 			'id' => '[0-9]+'
 		)
 	);
-
+	Router::connect('/search', array('controller' => 'products', 'action' => 'search'));
 
 
 
@@ -84,6 +84,8 @@
 	Router::connect('/admin/bussinesses/contact', array('controller' => 'bussinesses', 'action' => 'contact', 'admin' => true,'prefix' => 'admin'));
 	Router::connect('/admin/bussinesses/detail_product', array('controller' => 'bussinesses', 'action' => 'detail_product', 'admin' => true,'prefix' => 'admin'));
 	Router::connect('/admin/forget_password', array('controller' => 'users', 'action' => 'forget_password', 'admin' => true));
+	Router::connect('/admin/user', array('controller' => 'users', 'action' => 'index', 'admin' => true));
+	Router::connect('/admin/user/add', array('controller' => 'users', 'action' => 'add', 'admin' => true));
 	//Router::connect('/admin/re_password/:code', array('controller' => 'users', 'action' => 'reset_password', 'admin' => true));
 	//Router::connect('/login', array('controller' => 'users', 'action' => 'login', 'admin' => true));
 	//Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));

@@ -7,7 +7,7 @@
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 full-width">
 								<div class="panel panel-info">
 									<div class="panel-heading">
-										<h3 class="panel-title">Dòng xe Huyndai</h3>
+										<h3 class="panel-title"><?php echo $cate_name['Category']['name'];?></h3>
 									</div>
 								</div>
 							</div>
@@ -23,7 +23,7 @@
 										<img data-src="" alt="" src="img/car-7.jpg">
 									</a> -->
 									<div class="car-des">
-										<h4>Toyota Highlander</h4>
+										<h4><?php echo $this->Tool->substr($item['Product']['name'],0,23);?></h4>
 										<div class="car-code">
 											<div class="car-code-content">
 												<span style="font-weight: bold;">Mã xe:</span>

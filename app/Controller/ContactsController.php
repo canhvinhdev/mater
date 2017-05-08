@@ -31,12 +31,13 @@ class ContactsController extends AppController {
 			$this->request->data['Contact']['created']=strtotime(date('Y-m-d H:i:s'));
 			//var_dump($this->request->data);die();
 			if ($this->Contact->save($this->request->data)) {
-				$this->Session->setFlash(__('The contact has been saved.'));
+				$this->Session->setFlash(__('Gửi Liên Hệ Thành Công'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The contact could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('Gửi Liên Hệ Thất bại'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 			}
 		}
+		$this->set('title_for_layout',"Liên Hệ - Đại Lý Cấp Số 1 Isuzu Việt Nam");
 		// $this->Contact->recursive = 0;
 		// $this->set('contacts', $this->Paginator->paginate());
 	}
@@ -77,7 +78,7 @@ class ContactsController extends AppController {
 			$this->Contact->id = $id;
 			$this->request->data['Contact']['publish']=1;
 			$this->Contact->save($this->request->data);
-
+			$this->Session->setFlash(__('Gửi mail thành công'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 			return $this->redirect(array('action' => 'admin_contact'));
 
         }else{

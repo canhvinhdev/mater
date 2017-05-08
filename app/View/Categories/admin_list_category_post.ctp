@@ -52,7 +52,7 @@
 							<td><?php echo $item['Category']['description'];?>
 							</td>
 							<td>	
-
+								<?php echo ($item['Category']['publish']==1)?'Hiển thị':'Không hiển thị';?>
 							</td>
 							<td>								
 								<div id="btn-limited" class="btn-group btn-group-xs btn-group-action btn-limited"><label for="" class="hidden">a</label>

@@ -111,7 +111,7 @@
 
 				<div class="page-header">
 					<h1>
-						Thêm sản phẩm mới
+						Sửa sản phẩm
 					</h1>
 				</div><!-- /.page-header -->				
 				<div class="row">
@@ -138,7 +138,7 @@
 
 							<div class="tab-content">
 								<div id="home4" class="tab-pane in active">
-								
+
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Tên sản phẩm mới</label>
 
@@ -151,7 +151,7 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Đường dẫn tôi ưu Seo</label>
 
 										<div class="col-sm-9">
-										<?php echo $this->Form->input('slug', array('class' =>'col-xs-10 col-sm-5','placeholder'=>'Nhập đường dẫn','label'=>false)); ?>
+											<?php echo $this->Form->input('slug', array('class' =>'col-xs-10 col-sm-5','placeholder'=>'Nhập đường dẫn','label'=>false)); ?>
 											
 										</div>
 									</div>
@@ -159,7 +159,7 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">Danh mục sản phẩm </label>
 
 										<div class="col-sm-9">
-										<?php 
+											<?php 
 											echo $this->Form->input('category_id', array('class' => 'chosen-select form-control','type' => 'select','options' => $categories,'default' => '0','label'=>false)); ?>
 											
 										</div>
@@ -288,187 +288,219 @@
 									
 								</div>
 
-								<div id="profile4" class="tab-pane ">
-									
-									<section >
+								<div id="profile4" class="tab-pane ">	
+
+
+									<script>
+										 var count=0;
 										
+										$(document).ready(function(){
+											$(".btn-success").click(function(){
+												count++;
+												 $("#insertImg").append('<fieldset id="additional-field-model"  class="img-list'+count+'" style="padding: 10px;"><div class="form-group"><div id="img-list"><div class="col-md-4"><?php echo $this->Form->input("image.", array("type" => "file", "multiple","class"=>"form-control input-md","required"=>false)); ?></div><div class="col-md-4"><?php echo $this->Form->input("title.",array("placeholder"=>"Nhập tiêu đề","class"=>"form-control input-md","required"=>false)); ?> </div><?php echo $this->Form->input("id.",array("type"=>"hidden","class"=>"form-control input-md","required"=>false)); ?> </div><div class="col-md-4"><p  class="btn btn-warning del-img" onclick=\'myFunction(".img-list'+count+'")\'><i class="fa fa-remove"></i><span > Xóa </span></p></div></div></fieldset>');
+											});	
+										});
+										function myFunction(a) {
+											$(a).remove();
+										};
+										 var data5=[];
+										function myFunction1(a,b) {
+											$(a).remove();
+											data5.push(b);
+											$("#test").val(data5);
+											
+										};	
+									</script>
+
+									<p class="btn btn-success create-new-field">
+										<i class="fa fa-plus"></i>
+										<span class="hidden-xs"> Tạo thêm ảnh </span>
+									</p>
+									<section id="insertImg">
+									<input type="hidden" name="img" id="test">
+									<?php
+										$count=0;
+										if(isset($pictures)):
+										foreach($pictures as $item):
+										if($item['Picture']['type']==0):
+										$count++;
+									?>
+										<fieldset id="additional-field-model" class="img-list<?php echo $count;?> " style="padding: 10px;">
+											<div class="form-group">
+												<div id="img-list">
+												<div class="col-md-4">
+													<?php echo $this->Form->input("image.", array("type" => "file", "multiple","class"=>"form-control input-md","required"=>false)); ?>
+												</div>
+												<div class="col-md-4">
+													<?php echo $this->Form->input('title.',array('placeholder'=>'Nhập tiêu đề','class'=>'form-control input-md','required'=>false,'value'=> $item['Picture']['title'])); ?> 
+												</div>
+												<?php echo $this->Form->input("id.",array("type"=>"hidden","class"=>"form-control input-md","required"=>false,"value"=> $item["Picture"]["id"])); ?> 
+												 
+												</div>	
+												<div class="col-md-4">
+													<p  class="btn btn-warning del-img " onclick="myFunction1('.img-list<?php echo $count;?>',<?php echo $item['Picture']['id'];?>)">
+														<i class="fa fa-remove"></i>
+														<span class=""> Xóa </span>
+													</p>
+												</div>
+											</div>
+										</fieldset>
+										<?php 
+										endif;
+										endforeach;
+										endif; 
+									?>
+									</section>
+									<div class="clearfix form-actions">
+										<div class="col-md-offset-3 col-md-9">
+											<button class="btn btn-info" type="submit">
+												<i class="ace-icon fa fa-check bigger-110"></i>
+												Thêm mới
+											</button>
+										</div>
+									</div>
+
+
+								</div>
+
+								<div id="dropdown14" class="tab-pane">
+									<script>
+										 var count1=0;
+										
+										$(document).ready(function(){
+											$(".btn-success").click(function(){
+												count1++;
+												 $("#insertImgs").append('<fieldset id="additional-field-model"  class="img-lists'+count1+'" style="padding: 10px;"><div class="form-group"><div id="img-list"><div class="col-md-4"><?php echo $this->Form->input("image1.", array("type" => "file", "multiple","class"=>"form-control input-md","required"=>false)); ?></div><div class="col-md-4"><?php echo $this->Form->input("title1.",array("placeholder"=>"Nhập tiêu đề","class"=>"form-control input-md","required"=>false)); ?> </div><?php echo $this->Form->input("id1.",array("type"=>"hidden","class"=>"form-control input-md","required"=>false)); ?> </div><div class="col-md-4"><p  class="btn btn-warning del-img" onclick=\'myFunction2(".img-lists'+count1+'")\'><i class="fa fa-remove"></i><span > Xóa </span></p></div></div></fieldset>');
+											});	
+										});
+										function myFunction2(a) {
+											$(a).remove();
+										};
+										 var data6=[];
+										function myFunction3(a,b) {
+											$(a).remove();
+											data6.push(b);
+
+											$("#test1").val(data6);
 
 											
-												<fieldset id="additional-field-model">
-													<div class="form-group">
-														<div class="col-md-6 col-sm-12">
-															<label class="col-md-12 " for="field-a">Đường dẫn ảnh</label>
-															<div class="input-group">
-																<?php echo $this->Form->input('image.', array('type' => 'file', 'multiple','class'=>'form-control input-md','required'=>false)); ?>
-																
-															</div>
-														</div>
-														<div class="col-md-2 col-xs-5">
-															<label class="col-md-12 " for="field-b">Tiêu đề ảnh</label>
-															<div class="input-group">
-																<?php echo $this->Form->input('title.',array('placeholder'=>'Nhập tiêu đề','required'=>false)); ?>
-															</div>
-														</div>
-														
-														<div class="col-md-6 col-sm-12">
-															<label class="col-md-12 " for="field-a">Đường dẫn ảnh</label>
-															<div class="input-group">
-																<?php echo $this->Form->input('image.', array('type' => 'file', 'multiple','class'=>'form-control input-md','required'=>false)); ?>
-																
-															</div>
-														</div>
-														<div class="col-md-2 col-xs-5">
-															<label class="col-md-12 " for="field-b">Tiêu đề ảnh</label>
-															<div class="input-group">
-																<?php echo $this->Form->input('title.',array('placeholder'=>'Nhập tiêu đề','required'=>false)); ?>
-															</div>
-														</div>
-														
+										};	
+									</script>
 
-														<div class="col-md-4 col-xs-7 text-right">
-															<label class="col-xs-12 control-label" for="field-c"><br /></label>
-															<a href="javascript:void(0);"  class="btn btn-warning remove-this-field">
-																<i class="fa fa-remove"></i>
-																<span class="hidden-xs"> Xóa </span>
-															</a>
-															<a href="javascript:void(0);"  class="btn btn-success create-new-field">
-																<i class="fa fa-plus"></i>
-																<span class="hidden-xs"> Tạo thêm ảnh </span>
-															</a>
-														</div>
-														
-													</div>
-
-
-												</fieldset>
-
-												<br />
-
-									
+									<p class="btn btn-success create-new-field">
+										<i class="fa fa-plus"></i>
+										<span class="hidden-xs"> Tạo thêm ảnh </span>
+									</p>
+									<section id="insertImgs">
+									<input type="hidden" name="img1" id="test1">
+									<?php
+										$count=0;
+										if(isset($pictures)):
+										foreach($pictures as $item):
+										if($item['Picture']['type']==1):
+										$count++;
+									?>
+										<fieldset id="additional-field-model" class="img-lists<?php echo $count;?> " style="padding: 10px;">
+											<div class="form-group">
+												<div id="img-list">
+												<div class="col-md-4">
+													<?php echo $this->Form->input("image1.", array("type" => "file", "multiple","class"=>"form-control input-md","required"=>false)); ?>
+												</div>
+												<div class="col-md-4">
+													<?php echo $this->Form->input('title1.',array('placeholder'=>'Nhập tiêu đề','class'=>'form-control input-md','required'=>false,'value'=> $item['Picture']['title'])); ?> 
+												</div>
+												<?php echo $this->Form->input("id1.",array("type"=>"hidden","class"=>"form-control input-md","required"=>false,"value"=> $item["Picture"]["id"])); ?> 
+												 
+												</div>	
+												<div class="col-md-4">
+													<p  class="btn btn-warning del-img " onclick="myFunction3('.img-lists<?php echo $count;?>',<?php echo $item['Picture']['id'];?>)">
+														<i class="fa fa-remove"></i>
+														<span class=""> Xóa </span>
+													</p>
+												</div>
+											</div>
+										</fieldset>
+										<?php 
+										endif; 
+										endforeach;
+										endif; 
+									?>
 									</section>
 									<div class="clearfix form-actions">
 										<div class="col-md-offset-3 col-md-9">
 											<button class="btn btn-info" type="submit">
 												<i class="ace-icon fa fa-check bigger-110"></i>
-													Thêm mới
-												</button>
-											</div>
+												Thêm mới
+											</button>
 										</div>
-
-								
-								</div>
-								
-								<div id="dropdown14" class="tab-pane">
-									<section >
-										
-
-
-											<div name="demo">
-
-
-												<fieldset id="additional-field-model1">
-													<div class="form-group">
-														<div class="col-md-6 col-sm-12">
-															<label class="col-md-12" for="field-1">Đường dẫn ảnh</label>
-															<div class="input-group">
-																
-																<?php echo $this->Form->input('image1.', array('type' => 'file', 'multiple','class'=>'form-control input-md','required'=>false)); ?>
-																
-															</div>
-														</div>
-														<div class="col-md-2 col-xs-5">
-															<label class="col-md-12 " for="field-2">Tiêu đề ảnh</label>
-															<div class="input-group">
-																<?php echo $this->Form->input('title1.',array('placeholder'=>'Nhập tiêu đề','required'=>false)); ?>
-															</div>
-														</div>
-														<div class="col-md-4 col-xs-7 text-right">
-															<label class="col-xs-12 control-label" for="field-c"><br /></label>
-															<a href="javascript:void(0);"  class="btn btn-warning remove-this-field">
-																<i class="fa fa-remove"></i>
-																<span class="hidden-xs"> Xóa </span>
-															</a>
-															<a href="javascript:void(0);"  class="btn btn-success create-new-field">
-																<i class="fa fa-plus"></i>
-																<span class="hidden-xs"> Tạo thêm ảnh </span>
-															</a>
-														</div>
-													</div>
-												</fieldset>
-												<br />
-											</div>
-										
-									</section>
-									<div class="clearfix form-actions">
-										<div class="col-md-offset-3 col-md-9">
-											<button class="btn btn-info" type="submit">
-												<i class="ace-icon fa fa-check bigger-110"></i>
-													Thêm mới
-												</button>
-											</div>
-										</div>
-
-								</div>
-								
-								<div id="dropdown15" class="tab-pane">
-									<div class="container" >						
-										<h5>Thêm thuộc tính sản phẩm</h5>
-										<div id="bs-ml-treetable" class="treetable">
-											Loading ...
-										</div>
-										 <input type="hidden" name="techniques" id="techniques">
 									</div>
-									<div class="clearfix form-actions">
-										<div class="col-md-offset-3 col-md-9">
-											<button class="btn btn-info" type="submit">
-												<i class="ace-icon fa fa-check bigger-110"></i>
-													Thêm mới
-												</button>
-											</div>
-									</div>
+
 								</div>
-								
+
+										<div id="dropdown15" class="tab-pane">
+											<div class="container" >						
+												<h5>Thêm thuộc tính sản phẩm</h5>
+												<div id="bs-ml-treetable" class="treetable">
+													Loading ...
+												</div>
+												<input type="hidden" name="techniques" id="techniques">
+												<input type="hidden" name="tech" id="tech">
+											</div>
+											<div class="clearfix form-actions">
+												<div class="col-md-offset-3 col-md-9">
+													<button class="btn btn-info" type="submit">
+														<i class="ace-icon fa fa-check bigger-110"></i>
+														Thêm mới
+													</button>
+												</div>
+											</div>
+										</div>
+ 
+
+									</div>
+									<?php echo $this->Form->end(); ?>	
+								</div>
 
 							</div>
-							<?php echo $this->Form->end(); ?>	
 						</div>
-						
-					</div>
-				</div>
-			</div><!-- /.col -->
-		</div><!-- /.row -->
-	</div><!-- /.page-content -->
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+			</div><!-- /.page-content -->
 
-</div>
-<script type="text/javascript">
-	
-	var data= [];
+		</div>
+		<script type="text/javascript">
 
-	<?php foreach($picture as $item):?>
-		data.push({id:<?php echo $item['id'];?>,name:<?php echo $item['name'];?>,pid:<?php echo $item['pid'];?>,innercode:<?php echo $item['innercode'];?>});
-	<?php endforeach;?>
+			var data= [];
 
-	var data1=[];
-	var dem=<?php echo $technique;?>;
+			<?php foreach($picture as $item):?>
+			data.push({id:<?php echo $item['id'];?>,name:<?php echo $item['name'];?>,pid:<?php echo $item['pid'];?>,innercode:<?php echo $item['innercode'];?>});
+		<?php endforeach;?>
+
+		var data1=[];
+		var data2=[];
+		var dem=<?php echo $technique;?>;
+		alert(dem);
 
 
-	$("#bs-ml-treetable").bstreetable({
-		data:data,
-		maintitle:"Tên trường",
-		nodeaddCallback:function(data,callback){
+		$("#bs-ml-treetable").bstreetable({
+			data:data,
+			maintitle:"Tên trường",
+			nodeaddCallback:function(data,callback){
 			//alert(JSON.stringify(data));
 			
 			callback({id:dem++,name:data.name,innercode:data.innercode,pid:data.pid});
 		},
 		noderemoveCallback:function(data,callback){
-			//alert(JSON.stringify(data));
+			data2.push(data);
+			alert(data2);
+			$("#tech").val(data2);
 			//do your things then callback
 			callback();
 		},
 		nodeupdateCallback:function(data,callback){
 			data1.push(data);
-			$("#techniques").val(JSON.stringify(data1));
 			alert(JSON.stringify(data1));
+			$("#techniques").val(JSON.stringify(data1));
 			//do your things then callback
 			callback();
 		},

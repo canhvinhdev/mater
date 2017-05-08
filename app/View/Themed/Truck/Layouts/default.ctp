@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-    <title>Web giới thiệu ô tô</title>
+    <title><?php echo $title_for_layout;?></title>
+    <?php echo $this->Html->meta('icon');?>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" /> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible” content=”IE=edge">
@@ -66,7 +67,7 @@
     	 <?php echo $this->Element('slide'); ?>	
     </div>
     <?php echo $this->fetch('content'); ?>
-    <?php echo $this->Element('sideba'); ?>	
+    <?php //echo $this->Element('sideba'); ?>	
     <footer>
     	<?php echo $this->Element('footer'); ?>
     </footer>

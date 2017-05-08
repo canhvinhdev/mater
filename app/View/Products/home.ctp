@@ -16,53 +16,32 @@
 								foreach ($product_new as $item): 
 							?>
 							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-								 <div class="thumbnail-section-car">
-									<?php 
-									$title = $item['Product']['name'];
-									$image = $this->Html->image($item['Product']['thumbnail'],array('alt'=> $title,'class'=>'thumbnail thumbnail-car img-responsive '));
-									echo $this->Html->link(
-										$image,array(
-											'controller' => 'products',
-											'action' => 'view',$item['Product']['id']
-										),
-										array(
-											'title' => $item['Product']['name'],
-											'escape' => false,
-											'class' => 'thumbnail thumbnail-car'
-										)
-
-									);?>
+								<div class="thumbnail-section-car">
+								<a href="<?php echo '/san-pham/'.$item['Category']['slug'].'/'.$item['Product']['slug'].'-'.$item['Product']['id'].'.html';?>" title="<?php echo $item['Product']['name'];?>" class="thumbnail thumbnail-car"> <img src="<?php echo$item['Product']['thumbnail']; ?>" alt="<?php echo $item['Product']['name'];?>" class="thumbnail thumbnail-car img-responsive"> </a>
+								
+									<!-- <a href="#" class="thumbnail thumbnail-car">
+										<img data-src="" alt="" src="img/car-7.jpg">
+									</a> -->
 									<div class="car-des">
-										<h4><?php echo $item['Product']['name']; ?></h4>
+										<h4><?php echo $this->Tool->substr($item['Product']['name'],0,23);?></h4>
 										<div class="car-code">
 											<div class="car-code-content">
 												<span style="font-weight: bold;">Mã xe:</span>
 												<span id="car-code-number" style="">
-													<?php echo $item['Product']['discount']; ?>
+													<?php echo $item['Product']['referee'];?>
 												</span>
 
 											</div>
 
 										</div>
 										<div class="car-price-content">
-											<span>Giá: <span id="car-price"><?php echo $item['Product']['price']; ?> triệu</span></span>
+											<span>Giá: <span id="car-price"><?php echo $item['Product']['price'];?> triệu</span></span>
 										</div>
 										<div id="button-info-car">
-											<?php echo $this->Html->link(
-												'<button type="button" class="btn btn-info">Xem chi tiết</button>',array(
-													'controller' => 'products',
-													'action' => 'view',$item['Product']['id']
-												),
-												array(
-													'title' => $item['Product']['name'],
-													'escape' => false
-												)
-
-											);?>
+											<a href="<?php echo '/san-pham/'.$item['Category']['slug'].'/'.$item['Product']['slug'].'-'.$item['Product']['id'].'.html';?>" title="<?php echo $item['Product']['name'];?>" ><button type="button" class="btn btn-info">Xem chi tiết</button></a>
+											
 											
 										</div>
-
-
 									</div>
 								</div>
 							</div>

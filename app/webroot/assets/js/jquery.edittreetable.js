@@ -158,7 +158,7 @@
             var parentUl = curElement.closest(".class-level-ul");
             data.pid = parentUl.attr("data-pid");
             data.innercode = parentUl.attr("data-innercode");
-            data.pinnercode = curElement.parents(".class-level-"+(parentUl.attr("data-level")-1)).children("ul").attr("data-innercode");
+            //data.pinnercode = curElement.parents(".class-level-"+(parentUl.attr("data-level")-1)).children("ul").attr("data-innercode");
             parentUl.find(".form-control").each(function(){
                 data[$(this).attr("name")]=$(this).val();                
             });

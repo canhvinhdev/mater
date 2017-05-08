@@ -44,8 +44,8 @@
 									<ul class="list-unstyled list-styled">
 										<li><a href="/">Trang chủ</a></li>
 										<li><a href="/gioi_thieu">Giới thiệu</a></li>
-										<li><a href="#about">Xe đang bán</a></li>
-										<li><a href="#about">Tin tức</a></li>
+										<!-- <li><a href="#about">Xe đang bán</a></li>
+										<li><a href="#about">Tin tức</a></li> -->
 										<li><a href="/contact">Liên hệ</a></li>
 									</ul>
 								</div>

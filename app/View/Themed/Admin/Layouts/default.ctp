@@ -37,7 +37,13 @@
 
 </head>
 <body class="no-skin">
-    <?php echo $this->Session->flash();?>
+	<script>
+		$( document ).ready(function() {
+			$("#messageMessage").animate({top: '50px'});
+			setTimeout(function(){ $("#messageMessage").hide()}, 3000);
+		});
+	</script>
+	<?php echo $this->Session->flash('message'); ?>
 	<?php echo $this->Element('header'); ?>
 
 	<?php echo $this->fetch('content'); ?>

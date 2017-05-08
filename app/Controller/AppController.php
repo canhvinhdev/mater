@@ -60,6 +60,7 @@ class AppController extends Controller {
             'admin') {
             $admin=$this->get_user(); 
             $this->theme = 'Admin'; 
+           
         } else {
             $this->Auth->allow();
             $this->theme = 'Truck';	
@@ -167,15 +168,21 @@ class AppController extends Controller {
        // pr($supporter);die();
         return  $supporter;
     }
+    public function slide(){
+        $this->loadModel('Slide');
+        $slide = $this->Slide->find('all');
+       // pr($supporter);die();
+        return  $slide;
+    }
 
-    function _setErrorLayout() {  
-       if ($this->name == 'CakeError') {
-            $this->theme='Truck';
-            $this->layout = 'error';  
+    // function _setErrorLayout() {  
+    //    if ($this->name == 'CakeError') {
+    //         $this->theme='Truck';
+    //         $this->layout = 'error';  
            
-       }    
-    }
-    function beforeRender () {  
-       $this->_setErrorLayout();
-    }
+    //    }    
+    // }
+    // function beforeRender () {  
+    //    $this->_setErrorLayout();
+    // }
 }

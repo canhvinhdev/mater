@@ -205,7 +205,7 @@
 					</a>
 				</li>
 				<li class="">
-					<a href="<?php echo Router::url('/',true ); ?>admin/list_post"" >
+					<a href="<?php echo Router::url('/',true ); ?>admin/list_post" >
 						<i class="menu-icon fa fa-file-o"></i>
 
 						<span class="menu-text">
@@ -227,6 +227,20 @@
 							Liên hệ
 
 							<span class="badge badge-primary"><?php echo count($contacts); ?></span>
+						</span>
+
+						
+					</a>
+
+
+				
+				</li>
+				<li class="">
+					<a href="<?php echo Router::url('/',true ); ?>admin/user">
+						<i class="menu-icon fa fa-file-o"></i>
+
+						<span class="menu-text">
+							Quản lý người dùng
 						</span>
 
 						

@@ -15,57 +15,6 @@ class CategoriesController extends AppController {
  */
 	public $components = array('Paginator');
 	
-/**
- * index method
- *
- * @return void
- */
-	public function index() {
-		$this->Category->recursive = 0;
-		$this->set('categories', $this->Paginator->paginate());
-	}
-
-/**
- * view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function view($id = null) {
-		if (!$this->Category->exists($id)) {
-			throw new NotFoundException(__('Invalid category'));
-		}
-		$options = array('conditions' => array('Category.' . $this->Category->primaryKey => $id));
-		$this->set('category', $this->Category->find('first', $options));
-	}
-
-/**
- * add method
- *
- * @return void
- */
-	public function add() {
-		if ($this->request->is('post')) {
-
-			$this->Category->create();
-			$this->request->data['Category']['slug']=$this->Tool->slug($this->request->data['Category']['slug']);
-			if ($this->Category->save($this->request->data)) {
-				$this->Session->setFlash(__('The category has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The category could not be saved. Please, try again.'));
-			}
-		}
-	}
-
-/**
- * edit method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
 	public function admin_category_post_edit($id = null) {
 		if (!$this->Category->exists($id)) {
 			throw new NotFoundException(__('Invalid category'));
@@ -73,10 +22,10 @@ class CategoriesController extends AppController {
 		if ($this->request->is(array('post', 'put'))) {
 			$this->request->data['Category']['slug']=$this->Tool->slug($this->request->data['Category']['slug']);
 			if ($this->Category->save($this->request->data)) {
-				$this->Session->setFlash(__('The category has been saved.'));
+				$this->Session->setFlash(__('Sửa danh mục thành công.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 				return $this->redirect(array('action' => 'admin_list_category_post'));
 			} else {
-				$this->Session->setFlash(__('The category could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('Xóa danh mục thất bại.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 			}
 		} else {
 			$options = array('conditions' => array('Category.' . $this->Category->primaryKey => $id));
@@ -97,10 +46,10 @@ class CategoriesController extends AppController {
 			throw new NotFoundException(__('Invalid category'));
 		}
 		if ($this->Category->delete()) {
-			$mess= array('key'=>'success','value'=>'Xóa thành công');
+			$this->Session->setFlash(__('Xóa danh mục thành công.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 			$this->Session->setFlash($mess,'flash',array('alert'=>'info'));
 		} else {
-			$this->Session->setFlash(__('The category could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('Xóa danh mục thất bại.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 		}
 		return $this->redirect(array('action' => 'admin_list_category_post'));
 	}
@@ -123,15 +72,15 @@ class CategoriesController extends AppController {
 			$this->request->data['Category']['created']=strtotime(date('Y-m-d H:i:s'));
 			if ($this->Category->save($this->request->data)) {
 				$mess= array('key'=>'success','value'=>'Cập nhật thành công');
-				$this->Session->setFlash($mess,'flash',array('alert'=>'info'));
+				$this->Session->setFlash(__('Lưu danh mục thành công.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 				return $this->redirect(array('action' => 'admin_list_category_post'));
 			} else {
-				$mess= array('key'=>'error','value'=>'Cập nhật thất bại');
-				$this->Session->setFlash(__('The category has been saved.'));
+				$this->Session->setFlash(__('Lưu danh mục thất bại.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 			}
 		}
 	}
 	public function admin_list_category_product(){
+
 		$this->Category->recursive = 0;
 		$this->Paginator->settings = array(
 			'conditions' => array('Category.type' => 0),
@@ -139,6 +88,7 @@ class CategoriesController extends AppController {
 			
 		);
 		$this->set('categories',$this->Paginator->paginate());
+
 	}
 	public function admin_category_product(){
 
@@ -146,13 +96,15 @@ class CategoriesController extends AppController {
 			$this->Category->create();
 			$this->request->data['Category']['slug']=$this->Tool->slug($this->request->data['Category']['slug']);
 			$this->request->data['Category']['type']=0;
-			date_default_timezone_set('Asia/Ha_Noi');
+			//date_default_timezone_set('Asia/Ha_Noi');
 			$this->request->data['Category']['created']=strtotime(date('Y-m-d H:i:s'));
 			if ($this->Category->save($this->request->data)) {
-				$this->Session->setFlash(__('The category has been saved.'));
-				return $this->redirect(array('action' => 'admin_list_category_post'));
+			
+
+				$this->Session->setFlash(__('Lưu danh mục thành công.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
+				return $this->redirect(array('action' => 'admin_list_category_product'));
 			} else {
-				$this->Session->setFlash(__('The category could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('Lưu danh mục thấy bại.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 			}
 		}
 	}
@@ -162,9 +114,9 @@ class CategoriesController extends AppController {
 			throw new NotFoundException(__('Invalid category'));
 		}
 		if ($this->Category->delete()) {
-			$this->Session->setFlash(__('The category has been deleted.'));
+			$this->Session->setFlash(__('Xóa danh mục thành công.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 		} else {
-			$this->Session->setFlash(__('The category could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('Xóa danh mục thất bại.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 		}
 		return $this->redirect(array('action' => 'admin_list_category_product'));
 	}
@@ -175,10 +127,10 @@ class CategoriesController extends AppController {
 		if ($this->request->is(array('post', 'put'))) {
 			$this->request->data['Category']['slug']=$this->Tool->slug($this->request->data['Category']['slug']);
 			if ($this->Category->save($this->request->data)) {
-				$this->Session->setFlash(__('The category has been saved.'));
+				$this->Session->setFlash(__('Sửa danh mục thành công.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 				return $this->redirect(array('action' => 'admin_list_category_product'));
 			} else {
-				$this->Session->setFlash(__('The category could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('Sửa danh mục thành công.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 			}
 		} else {
 			$options = array('conditions' => array('Category.' . $this->Category->primaryKey => $id));

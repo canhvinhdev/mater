@@ -40,6 +40,7 @@ class PostsController extends AppController {
 
 		));
 		$this->set('cate',$cate['Category']);
+		 $this->set('title_for_layout', $cate['Category']['name']);
 
 	}
 
@@ -53,6 +54,7 @@ class PostsController extends AppController {
 	public function view($slug_cat= null,$slug_post= null,$id = null) {
 		$options = array('conditions' => array('Post.' . $this->Post->primaryKey => $id));
 		$this->set('post', $this->Post->find('first', $options));
+		$this->set('title_for_layout', $this->Post->find('first', $options)['Post']['title']);
 	}
 
 /**
@@ -70,10 +72,10 @@ class PostsController extends AppController {
 			 $this->request->data['Post']['created']=strtotime(date('Y-m-d H:i:s'));
 			  $this->request->data['Post']['slug']=$this->Tool->slug($this->request->data['Post']['slug']);
 			if ($this->Post->save($this->request->data)) {
-				$this->Session->setFlash(__('The post has been saved.'));
+				$this->Session->setFlash(__('Lưu bài viêt thành công.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 				return $this->redirect(array('action' => 'admin_list_post'));
 			} else {
-				$this->Session->setFlash(__('The post could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('Lưu bài viêt thất bại.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 			}
 		}
 		$categories = $this->Post->Category->find('list');
@@ -98,10 +100,10 @@ class PostsController extends AppController {
 		if ($this->request->is(array('post', 'put'))) {
 			 $this->request->data['Post']['slug']=$this->Tool->slug($this->request->data['Post']['slug']);
 			if ($this->Post->save($this->request->data)) {
-				$this->Session->setFlash(__('The post has been saved.'));
+				$this->Session->setFlash(__('Sửa bài viêt thành công.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 				return $this->redirect(array('action' => 'admin_list_post'));
 			} else {
-				$this->Session->setFlash(__('The post could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('Sửa bài viêt thất bại.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 			}
 		} else {
 			$options = array('conditions' => array('Post.' . $this->Post->primaryKey => $id));
@@ -127,9 +129,9 @@ class PostsController extends AppController {
 			throw new NotFoundException(__('Invalid post'));
 		}
 		if ($this->Post->delete()) {
-			$this->Session->setFlash(__('The post has been deleted.'));
+			$this->Session->setFlash(__('Xóa bài viêt thành công.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 		} else {
-			$this->Session->setFlash(__('The post could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('Xóa bài viêt thất bại.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 		}
 		return $this->redirect(array('action' => 'admin_list_post'));
 	}

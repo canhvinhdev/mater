@@ -50,6 +50,7 @@ class ProductsController extends AppController {
                     'order' => array('Product.created' => 'desc')
                 ) );
 		$this->set('truck',$truck);
+		$this->set('title_for_layout', $this->Product->find('first', $options)['Product']['name']);
 		//$this->loadModel('Technique');
 
 	}
@@ -64,7 +65,8 @@ class ProductsController extends AppController {
 			//pr($this->request->data);die();
 
 			$this->Product->create();
-			$this->request->data['Product']['user_id']=$this->get_user()['User']['id'];
+			$this->request->data['Product']['user_id']=$this->get_user()['id'];
+
 			$this->request->data['Product']['slug']=$this->Tool->slug($this->request->data['Product']['slug']);
 			$this->Product->save($this->request->data);
 			
@@ -90,7 +92,7 @@ class ProductsController extends AppController {
 			
 			$image=$this->request->data['Product'];
 			$this->image($Product,$image);
-
+			$this->Session->setFlash(__('Thêm sản phẩm thành công.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 			return $this->redirect(array('action' => 'admin_list_product'));
 			
 		}else{
@@ -136,6 +138,10 @@ class ProductsController extends AppController {
 			         {
 			          $filename = '/uploads/furniture/' .$result['filename'];
 			          $this->Picture->create();
+			          if( isset($image['id'][$i]) && !empty($image['id'][$i]) ){
+			          	 $this->request->data['Picture']['id']= $image['id'][$i];
+
+			          }
 			          $this->request->data['Picture']['image'] = $filename;	
 			          $this->request->data['Picture']['title'] = $image['title'][$i];	
 			          $this->request->data['Picture']['type']=0;
@@ -160,6 +166,10 @@ class ProductsController extends AppController {
 			         {
 			          $filename = '/uploads/furniture/' .$result['filename'];
 			          $this->Picture->create();
+			          if( isset($image['id1'][$i]) && !empty($image['id1'][$i]) ){
+			          	 $this->request->data['Picture']['id']= $image['id1'][$i];
+
+			          }
 			          $this->request->data['Picture']['image'] = $filename;	
 			          $this->request->data['Picture']['title'] = $image['title1'][$i];	
 			          $this->request->data['Picture']['type']=1;
@@ -180,12 +190,48 @@ class ProductsController extends AppController {
 			throw new NotFoundException(__('Invalid product'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
-			if ($this->Product->save($this->request->data)) {
-				$this->Session->setFlash(__('The product has been saved.'));
-				return $this->redirect(array('action' => 'admin_list_product'));
-			} else {
-				$this->Session->setFlash(__('The product could not be saved. Please, try again.'));
+			 $this->loadModel('Picture');
+			//pr($this->request->data);die();
+			$ids=$this->request->data['Product'];
+			$this->image($id,$ids);
+			
+			$img=explode(',', $this->request->data['img']);
+			foreach ( $img as $id) {
+				$this->Picture->id = $id;
+				$this->Picture->delete();
 			}
+			$img=explode(',', $this->request->data['img1']);
+			foreach ( $img as $id) {
+				$this->Picture->id = $id;
+				$this->Picture->delete();
+			}
+			 $this->loadModel('Technique');
+			 $tech=explode(',',$this->request->data['tech']);
+			 foreach ( $tech as $id) {
+			 	$this->Technique->id = $id;
+			 	$this->Technique->delete();
+			 }
+			 if(!empty($this->request->data['techniques'])){
+			 	
+			 		$techniques=$this->request->data['techniques'];
+					$techniques=json_decode($techniques, true);
+				 	foreach ($techniques as $item) {
+				 		pr($item);
+					
+					$this->Technique->create();
+					$this->request->data['Technique']['id']=$item['id'];
+					$this->request->data['Technique']['name']=$item['name'];
+					$this->request->data['Technique']['value']=$item['innercode'];
+					$this->request->data['Technique']['product_id']=$id;
+					$this->request->data['Technique']['pater']=$item['pid'];
+					$this->Technique->save($this->request->data);
+				}
+
+			 }
+			 
+			 $this->Product->save($this->request->data);
+			 return $this->redirect(array('action' => 'admin_list_product'));
+			
 		} else {
 			$options = array('conditions' => array('Product.' . $this->Product->primaryKey => $id));
 			$this->request->data = $this->Product->find('first', $options);
@@ -221,7 +267,9 @@ class ProductsController extends AppController {
 			$Picture=$this->Picture->find('all',array(
 				'conditions' => array('Picture.product_id' => $id)		
 			));
+			
 			$this->set('pictures',$Picture);
+			
 
 		}
 		
@@ -240,9 +288,9 @@ class ProductsController extends AppController {
 			throw new NotFoundException(__('Invalid product'));
 		}
 		if ($this->Product->delete()) {
-			$this->Session->setFlash(__('The product has been deleted.'));
+			$this->Session->setFlash(__('Xóa sản phẩm thành công.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 		} else {
-			$this->Session->setFlash(__('The product could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('Xóa sản phẩm thất bại.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 		}
 		return $this->redirect(array('action' => 'admin_list_product'));
 	}
@@ -255,25 +303,25 @@ class ProductsController extends AppController {
 			
 		);
 		$this->set('products', $this->Paginator->paginate());
+		$this->loadModel('Category');
+		$cate_name= $this->Category->find('first',array(
+			'conditions'=>array('Category.id'=>$id)
+		));
+		//pr($cate_name);
+		$this->set('cate_name', $cate_name);
+		$this->set('title_for_layout', $cate_name['Category']['name']);
 	}
 	public function home() {
 		$count=$this->bussiness();
 		$product_new = $this->Product->find('all',
                 array(
-                    'recursive' => -1,
                     'limit' => $count['number_product'],
-                    'fields' => array('name', 'price', 'thumbnail','id','category_id', 'slug', 'discount','publish'),
-                    'contain' => array(
-                        'Category' => array(
-                            'fields' => array('id', 'name', 'slug')
-                        )
-                    ),
                     'order' => array('Product.created' => 'desc'),
                     'conditions' => array('Product.publish' => 1)
                 )
             );
         $this->set(compact('product_new'));
-        //var_dump($product_new);
+        $this->set('title_for_layout', 'Isuzu Vinh - Đại Lý Cấp Số 1 Isuzu Việt Nam');
 		
 	}
 	public function admin_index(){
@@ -302,5 +350,31 @@ class ProductsController extends AppController {
         $total['Category_pro']=$cate_pro;
         $this->set(compact('total'));
 
+	}
+	public function search(){
+	    //$keywords = $this->request->query('key');
+	    $keywords=$this->request->data['key'];
+		$search=$this->Product->find('all',array(
+            'conditions' => array(
+                'Product.publish' => 1,
+                'AND' => array(
+                    'Product.name LIKE' => "%$keywords%"
+                )
+            ),
+            'limit' => 16,
+            'order' => array(
+                'Product.created' => 'desc'
+            )
+            // 'paramType' => 'querystring'
+        ));
+       echo '<ul>';
+       		if(isset($search)):
+				foreach ($search as $item): 
+					echo '<li class="clearfix"><a href="/san-pham/' .$item['Category']['slug']. '/' . $item['Product']['slug'].'-'.$item['Product']['id'].'.html" title="'.$item['Product']['name'].'"> <img src="'.$item['Product']['thumbnail'].'" alt="'. $item['Product']['name'].'" class="search-img" ><p>'.$this->Tool->substr($item['Product']['name'],0,35).'</p></a>
+								</li>';
+
+				endforeach;
+			endif;
+	   echo '<ul>';die();
 	}
 }
