@@ -53,7 +53,7 @@
 													        'type'=>'select',
 													        'class'=>'form-control',
 													        'options' => $options, 
-													        'selected' => $bussiness['Bussiness']['category_list'] )
+													        'selected' =>(isset($Supporter[1]['Supporter']['category_list']))?$Supporter[1]['Supporter']['category_list']:'' )
 													    );  ?>
 												<!-- <select name="" id="input" class="form-control" required="required">
 													<option value="1">12</option>

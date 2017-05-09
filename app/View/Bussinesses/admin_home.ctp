@@ -51,13 +51,13 @@
 										<tbody>
 											<tr>
 												<td>Logo</td>
-												<td><?php echo $this->Form->input('logo', array('label' => false,'class' => 'form-control', 'id' => 'thumbnail','value'=> $bussiness['Bussiness']['logo'] )); ?>
+												<td><?php echo $this->Form->input('logo', array('label' => false,'class' => 'form-control', 'id' => 'thumbnail','value'=>(isset($bussiness['Bussiness']['logo']))?$bussiness['Bussiness']['logo']:'')); ?>
 												<input type="button" value="Chọn..." onclick="BrowseServer();" class="form-control" /></td> 
 											</tr>
 											<tr>
 												<td>Favicon</td>
 
-												 <td><?php echo $this->Form->input('favicon', array('label' => false,'class' => 'form-control', 'id' => 'thumbnail1','value'=> $bussiness['Bussiness']['favicon'])); ?>
+												 <td><?php echo $this->Form->input('favicon', array('label' => false,'class' => 'form-control', 'id' => 'thumbnail1','value'=> (isset($bussiness['Bussiness']['logo']))?$bussiness['Bussiness']['favicon']:'')); ?>
 												<input type="button" value="Chọn..." onclick="BrowseServer1();" class="form-control" /></td> 
 											</tr>
 										</tbody>
@@ -83,22 +83,22 @@
 										<tbody>
 											<tr>
 												<td>Slide 1</td>
-												<td><?php echo $this->Form->input('Slide.0.thumbnail', array('label' => false,'class' => 'form-control', 'id' => 'thumbnail2','value'=>$slide[0]['Slide']['thumbnail'] )); ?>
+												<td><?php echo $this->Form->input('Slide.0.thumbnail', array('label' => false,'class' => 'form-control', 'id' => 'thumbnail2','value'=>(isset($slide[0]['Slide']['thumbnail']))?$slide[0]['Slide']['thumbnail']:'')); ?>
 												<input type="button" value="Chọn..." onclick="BrowseServer2	();" class="form-control" /></td> 
 
-												<td><?php echo $this->Form->input('Slide.0.name', array('label' => false,'class' => 'form-control','value'=>$slide[0]['Slide']['name'])); ?></td>
+												<td><?php echo $this->Form->input('Slide.0.name', array('label' => false,'class' => 'form-control','value'=>(isset($slide[0]['Slide']['name']))?$slide[0]['Slide']['name']:'')); ?></td>
 											</tr>
 											<tr>
 												<td>Slide 2</td>
-												<td><?php echo $this->Form->input('Slide.1.thumbnail', array('label' => false,'class' => 'form-control', 'id' => 'thumbnail3','value'=>$slide[1]['Slide']['thumbnail'])); ?>
+												<td><?php echo $this->Form->input('Slide.1.thumbnail', array('label' => false,'class' => 'form-control', 'id' => 'thumbnail3','value'=>(isset($slide[1]['Slide']['thumbnail']))?$slide[1]['Slide']['thumbnail']:'')); ?>
 												<input type="button" value="Chọn..." onclick="BrowseServer3();" class="form-control" /></td> 
-												<td><?php echo $this->Form->input('Slide.1.name', array('label' => false,'class' => 'form-control','value'=>$slide[1]['Slide']['name'])); ?></td>
+												<td><?php echo $this->Form->input('Slide.1.name', array('label' => false,'class' => 'form-control','value'=>(isset($slide[1]['Slide']['name']))?$slide[1]['Slide']['name']:'')); ?></td>
 											</tr>
 											<tr>
 												<td>Slide 3</td>
-												<td><?php echo $this->Form->input('Slide.2.thumbnail', array('label' => false,'class' => 'form-control', 'id' => 'thumbnail4','value'=>$slide[2]['Slide']['thumbnail'])); ?>
+												<td><?php echo $this->Form->input('Slide.2.thumbnail', array('label' => false,'class' => 'form-control', 'id' => 'thumbnail4','value'=>(isset($slide[2]['Slide']['thumbnail']))?$slide[2]['Slide']['thumbnail']:'')); ?>
 												<input type="button" value="Chọn..." onclick="BrowseServer4();" class="form-control" /></td> 
-												<td><?php echo $this->Form->input('Slide.2.name', array('label' => false,'class' => 'form-control','value'=>$slide[2]['Slide']['name'])); ?></td>
+												<td><?php echo $this->Form->input('Slide.2.name', array('label' => false,'class' => 'form-control','value'=>(isset($slide[2]['Slide']['name']))?$slide[2]['Slide']['name']:'')); ?></td>
 											</tr>
 											
 										</tbody>
@@ -135,7 +135,7 @@
 													        'type'=>'select',
 													        'class'=>'form-control',
 													        'options' => $options, 
-													        'selected' => $bussiness['Bussiness']['number_new'] )
+													        'selected' => (isset($bussiness['Bussiness']['number_new']))?$bussiness['Bussiness']['number_new']:'')
 													    );?>
 												</td>
 											</tr>
@@ -159,33 +159,36 @@
 												<td>Hiển thị</td>
 												<td>
 													<?php 
-													$checked = ($Supporter[0]['Supporter']['status'] == true) ? 'checked' : '';	
-													echo $this->Form->input('Supporter.0.publish', array('class' => '','type'=>'checkbox','options'=>$Supporter[0]['Supporter']['status'],'checked'=>$checked)); ?> Bật
+													$checked='';
+													if(isset($Supporter[0]['Supporter']['status'])){
+														$checked = ($Supporter[0]['Supporter']['status'] == true) ? 'checked' : '';	
+													}
+													echo $this->Form->input('Supporter.0.publish1', array('class' => '','type'=>'checkbox','options'=>(isset($Supporter[0]['Supporter']['status']))?$Supporter[0]['Supporter']['status']:'','checked'=>$checked)); ?> Bật
 												</td>
 											</tr>
 											<tr>
 												<td>Tên hỗ trợ viên</td>
 												<td>
-													<?php echo $this->Form->input('Supporter.0.name', array('label' => false,'class' => 'form-control','value'=>'canh vinh','value'=>$Supporter[0]['Supporter']['name'])); ?>
+													<?php echo $this->Form->input('Supporter.0.name1', array('label' => false,'class' => 'form-control','value'=>'canh vinh','value'=>(isset($Supporter[0]['Supporter']['name']))?$Supporter[0]['Supporter']['name']:'')); ?>
 													
 												</td>
 											</tr>
 											<tr>
 												<td>Email</td>
 												<td>
-													<?php echo $this->Form->input('Supporter.0.email', array('label' => false,'class' => 'form-control','value'=>$Supporter[0]['Supporter']['email'])); ?>
+													<?php echo $this->Form->input('Supporter.0.email1', array('label' => false,'class' => 'form-control','value'=>(isset($Supporter[0]['Supporter']['email']))?$Supporter[0]['Supporter']['email']:'')); ?>
 												</td>
 											</tr>
 											<tr>
 												<td>Hotline</td>
 												<td>
-													<?php echo $this->Form->input('Supporter.0.hotline', array('label' => false,'class' => 'form-control','value'=>$Supporter[0]['Supporter']['hotline'])); ?>
+													<?php echo $this->Form->input('Supporter.0.hotline1', array('label' => false,'class' => 'form-control','value'=>(isset($Supporter[0]['Supporter']['hotline']))?$Supporter[0]['Supporter']['hotline']:'')); ?>
 												</td>
 											</tr>
 											<tr>
 												<td>Địa chỉ</td>
 												<td>
-													<?php echo $this->Form->input('Supporter.0.address', array('label' => false,'class' => 'form-control','value'=>$Supporter[0]['Supporter']['address'])); ?>
+													<?php echo $this->Form->input('Supporter.0.address1', array('label' => false,'class' => 'form-control','value'=>(isset($Supporter[0]['Supporter']['address']))?$Supporter[0]['Supporter']['address']:'')); ?>
 												</td>
 											</tr>
 											<hr>
@@ -199,31 +202,34 @@
 												<td>Hiển thị</td>
 												<td>
 													<?php 
-													$checked = ($Supporter[1]['Supporter']['status'] == true) ? 'checked' : '';	
-													echo $this->Form->input('Supporter.1.publish', array('label' => false,'type' => 'checkbox','options'=>$Supporter[1]['Supporter']['status'],'checked'=>$checked)); ?>
+													$checked='';
+													if(isset($Supporter[1]['Supporter']['status'])){
+														$checked = ($Supporter[1]['Supporter']['status'] == true) ? 'checked' : '';	
+													}
+													echo $this->Form->input('Supporter.1.publish1', array('class' => '','type'=>'checkbox','options'=>(isset($Supporter[1]['Supporter']['status']))?$Supporter[1]['Supporter']['status']:'','checked'=>$checked)); ?> Bật
 												</td>
 											</tr>
 											<tr>
 												<td>Tên hỗ trợ viên</td>
 												<td>
-													<?php echo $this->Form->input('Supporter.1.name', array('label' => false,'class' => 'form-control','value'=>$Supporter[1]['Supporter']['name'])); ?>
+													<?php echo $this->Form->input('Supporter.1.name1', array('label' => false,'class' => 'form-control','value'=>(isset($Supporter[1]['Supporter']['name']))?$Supporter[1]['Supporter']['name']:'')); ?>
 												</td>
 											</tr>
 											<tr>
 												<td>Email</td>
 												<td>
-													<?php echo $this->Form->input('Supporter.1.email', array('label' => false,'class' => 'form-control','value'=>$Supporter[1]['Supporter']['email'])); ?>
+													<?php echo $this->Form->input('Supporter.1.email1', array('label' => false,'class' => 'form-control','value'=>(isset($Supporter[1]['Supporter']['email']))?$Supporter[1]['Supporter']['email']:'')); ?>
 											</tr>
 											<tr>
 												<td>Hotline</td>
 												<td>
-													<?php echo $this->Form->input('Supporter.1.hotline', array('label' => false,'class' => 'form-control','value'=>$Supporter[1]['Supporter']['hotline'])); ?>
+													<?php echo $this->Form->input('Supporter.1.hotline1', array('label' => false,'class' => 'form-control','value'=>(isset($Supporter[1]['Supporter']['hotline']))?$Supporter[1]['Supporter']['hotline']:'')); ?>
 												</td>
 											</tr>
 											<tr>
 												<td>Địa chỉ</td>
 												<td>
-													<?php echo $this->Form->input('Supporter.1.address', array('label' => false,'class' => 'form-control','value'=>$Supporter[1]['Supporter']['address'])); ?>
+													<?php echo $this->Form->input('Supporter.1.address1', array('label' => false,'class' => 'form-control','value'=>(isset($Supporter[1]['Supporter']['address']))?$Supporter[1]['Supporter']['address']:'')); ?>
 												</td>
 											</tr>
 											<hr>
@@ -240,7 +246,7 @@
 											<tr>
 												<td>Nhúng mã:</td>
 												<td>
-												<?php echo $this->Form->textarea('fanpage', array('label' => false,'class' => 'form-control','value'=>$bussiness['Bussiness']['fanpage'])); ?></td>
+												<?php echo $this->Form->textarea('fanpage', array('label' => false,'class' => 'form-control','value'=>(isset($bussiness['Bussiness']['fanpage']))?$bussiness['Bussiness']['fanpage']:'')); ?></td>
 											</tr>
 										</tbody>
 									</table>
@@ -275,7 +281,7 @@
 													        'type'=>'select',
 													        'class'=>'form-control',
 													        'options' => $options, 
-													        'selected' => $bussiness['Bussiness']['number_product'] )
+													        'selected' =>(isset($bussiness['Bussiness']['number_product']))?$bussiness['Bussiness']['number_product']:'')
 													    );?>
 													
 												</td>
@@ -309,32 +315,32 @@
 											<tr>
 												<td>Tên cửa hàng</td>
 												<td>
-													<?php echo $this->Form->input('name_store', array('label' => false,'class' => 'form-control','value'=>$bussiness['Bussiness']['name_store'])); ?>
+													<?php echo $this->Form->input('name_store', array('label' => false,'class' => 'form-control','value'=>(isset($bussiness['Bussiness']['name_store']))?$bussiness['Bussiness']['name_store']:'')); ?>
 													
 												</td>
 											</tr>
 											<tr>
 												<td>Địa chỉ cửa hàng</td>
 												<td>
-													<?php echo $this->Form->input('address_store', array('label' => false,'class' => 'form-control','value'=>$bussiness['Bussiness']['address_store'])); ?>
+													<?php echo $this->Form->input('address_store', array('label' => false,'class' => 'form-control','value'=>(isset($bussiness['Bussiness']['address_store']))?$bussiness['Bussiness']['address_store']:'')); ?>
 												</td>
 											</tr>
 											<tr>
 												<td>Số điện thoại 1</td>
 												<td>
-													<?php echo $this->Form->input('phone_store', array('label' => false,'class' => 'form-control','value'=>$bussiness['Bussiness']['phone_store'])); ?>
+													<?php echo $this->Form->input('phone_store', array('label' => false,'class' => 'form-control','value'=>(isset($bussiness['Bussiness']['phone_store']))?$bussiness['Bussiness']['phone_store']:'')); ?>
 												</td>
 											</tr>
 											<tr>
 												<td>Email</td>
 												<td>
-													<?php echo $this->Form->input('email_store', array('label' => false,'class' => 'form-control','value'=>$bussiness['Bussiness']['email_store'])); ?>
+													<?php echo $this->Form->input('email_store', array('label' => false,'class' => 'form-control','value'=>(isset($bussiness['Bussiness']['email_store']))?$bussiness['Bussiness']['email_store']:'')); ?>
 												</td>
 											</tr>
 											<tr>
 												<td>Fax</td>
 												<td>
-													<?php echo $this->Form->input('fax_store', array('label' => false,'class' => 'form-control','value'=>$bussiness['Bussiness']['fax_store'])); ?>
+													<?php echo $this->Form->input('fax_store', array('label' => false,'class' => 'form-control','value'=>(isset($bussiness['Bussiness']['fax_store']))?$bussiness['Bussiness']['fax_store']:'')); ?>
 												</td>
 											</tr>
 										</tbody>
@@ -350,37 +356,37 @@
 											<tr>
 												<td>link_fb</td>
 												<td>
-													<?php echo $this->Form->input('link_fb', array('label' => false,'class' => 'form-control','value'=>$bussiness['Bussiness']['link_fb'])); ?>
+													<?php echo $this->Form->input('link_fb', array('label' => false,'class' => 'form-control','value'=>(isset($bussiness['Bussiness']['link_fb']))?$bussiness['Bussiness']['link_fb']:'')); ?>
 												</td>
 											</tr>
 											<tr>
 												<td>link_youtube</td>
 												<td>
-													<?php echo $this->Form->input('link_youtube', array('label' => false,'class' => 'form-control','value'=>$bussiness['Bussiness']['link_youtube'])); ?>
+													<?php echo $this->Form->input('link_youtube', array('label' => false,'class' => 'form-control','value'=>(isset($bussiness['Bussiness']['link_youtube']))?$bussiness['Bussiness']['link_youtube']:'')); ?>
 												</td>
 											</tr>
 											<tr>
 												<td>link_twitter</td>
 												<td>
-													<?php echo $this->Form->input('link_twitter', array('label' => false,'class' => 'form-control','value'=>$bussiness['Bussiness']['link_twitter'])); ?>
+													<?php echo $this->Form->input('link_twitter', array('label' => false,'class' => 'form-control','value'=>(isset($bussiness['Bussiness']['link_twitter']))?$bussiness['Bussiness']['link_twitter']:'')); ?>
 												</td>
 											</tr>
 											<tr>
 												<td>link_G+</td>
 												<td>
-													<?php echo $this->Form->input('link_G', array('label' => false,'class' => 'form-control','value'=>$bussiness['Bussiness']['link_g'])); ?>
+													<?php echo $this->Form->input('link_G', array('label' => false,'class' => 'form-control','value'=>(isset($bussiness['Bussiness']['link_g']))?$bussiness['Bussiness']['link_g']:'')); ?>
 												</td>
 											</tr>
 											<tr>
 												<td>link_edin</td>
 												<td>
-													<?php echo $this->Form->input('link_edin', array('label' => false,'class' => 'form-control','value'=>$bussiness['Bussiness']['link_edin'])); ?>
+													<?php echo $this->Form->input('link_edin', array('label' => false,'class' => 'form-control','value'=>(isset($bussiness['Bussiness']['link_edin']))?$bussiness['Bussiness']['link_edin']:'')); ?>
 												</td>
 											</tr>
 											<tr>
 												<td>link_pinterest</td>
 												<td>
-													<?php echo $this->Form->input('link_pinterest', array('label' => false,'class' => 'form-control','value'=>$bussiness['Bussiness']['link_pinterest'])); ?>
+													<?php echo $this->Form->input('link_pinterest', array('label' => false,'class' => 'form-control','value'=>(isset($bussiness['Bussiness']['link_pinterest']))?$bussiness['Bussiness']['link_pinterest']:'')); ?>
 												</td>
 											</tr>
 										</tbody>

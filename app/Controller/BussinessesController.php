@@ -108,52 +108,57 @@ class BussinessesController extends AppController {
 			$this->Bussiness->id =1;
 			$this->Bussiness->save($this->request->data);
 
-
-			$count=0;
 			$this->loadModel('Slide');
+			$count=$this->Slide->find('first');
+			$count=(!(empty($count))?$count['Slide']['id']:1);
 			foreach($this->request->data['Slide'] as $item){
-				$count++;
+				
 				$this->Slide->create();
-				$this->Slide->id = $count;
+				$this->request->data['Slide']['id'] = $count;
 				$this->request->data['Slide']['thumbnail']=$item['thumbnail'];
 				$this->request->data['Slide']['name']=$item['name'];
 				$this->Slide->save($this->request->data);
+				$count++;	
 			}
 
 			// supporter
-			$count=0;
 			$this->loadModel('Supporter');
+			$count=$this->Supporter->find('first');
+			$count=(!(empty($count))?$count['Supporter']['id']:1);
+			
 			foreach($this->request->data['Supporter'] as $item){
-				$count++;
 				$this->Supporter->create();
-				$this->Supporter->id = $count;
-				$this->request->data['Supporter']['status']=$item['publish'];
-				$this->request->data['Supporter']['name']=$item['name'];
-				$this->request->data['Supporter']['email']=$item['email'];
-				$this->request->data['Supporter']['hotline']=$item['hotline'];
-				$this->request->data['Supporter']['address']=$item['address'];
+				$this->request->data['Supporter']['id'] = $count;
+				$this->request->data['Supporter']['status']=$item['publish1'];
+				$this->request->data['Supporter']['name']=$item['name1'];
+				$this->request->data['Supporter']['email']=$item['email1'];
+				$this->request->data['Supporter']['hotline']=$item['hotline1'];
+				$this->request->data['Supporter']['address']=$item['address1'];
 				$this->Supporter->save($this->request->data);
+				$count++;
 			}
+			$this->Session->setFlash(__('Lưu cấu hình thành công.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 			return $this->redirect(array('controller'=>'products','action' => 'admin_index'));
 
 					
 		}
 		else{
-			 $Bussiness = $this->Bussiness->find('all');
-			 $this->set('bussiness',$Bussiness[0]);
+			 $Bussiness = $this->Bussiness->find('first');
+			 $this->set('bussiness',$Bussiness);
 
 
 			 $this->loadModel('Slide');
 			 $slide = $this->Slide->find('all');
 			 $this->set('slide',$slide);
+			// pr($slide);
 			 //supporter
 			 $this->loadModel('Supporter');
 			 $Supporter = $this->Supporter->find('all');
-			// pr($Supporter);
+			 //pr($Supporter);
 			 $this->set('Supporter',$Supporter);
 			 $options = array('6'=>'6','9'=>'9','12'=>'12','15'=>'15','18'=>'18');
 			 $this->set('options',$options);
-			 
+			 //die();
 		}
 		
 		

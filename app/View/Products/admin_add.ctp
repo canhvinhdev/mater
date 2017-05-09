@@ -169,7 +169,8 @@
 
 										<div class="col-sm-9">
 											<?php 
-											echo $this->Form->input('referee', array('class' => 'chosen-select form-control','label'=>false)); ?>
+											echo $this->Form->input('price', array('class' => 'chosen-select form-control','label'=>false)); ?>
+											
 										</div>
 									</div>
 									<div class="form-group">
@@ -177,7 +178,7 @@
 
 										<div class="col-sm-9">
 											<?php 
-											echo $this->Form->input('price', array('class' => 'chosen-select form-control','label'=>false)); ?>
+											echo $this->Form->input('referee', array('class' => 'chosen-select form-control','label'=>false)); ?>
 										</div>
 									</div>
 									<div class="form-group">

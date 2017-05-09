@@ -275,7 +275,7 @@
 										<div class="col-md-offset-3 col-md-9">
 											<button class="btn btn-info" type="submit">
 												<i class="ace-icon fa fa-check bigger-110"></i>
-												Thêm mới
+												Sửa mới
 											</button>
 
 											&nbsp; &nbsp; &nbsp;
@@ -297,7 +297,7 @@
 										$(document).ready(function(){
 											$(".btn-success").click(function(){
 												count++;
-												 $("#insertImg").append('<fieldset id="additional-field-model"  class="img-list'+count+'" style="padding: 10px;"><div class="form-group"><div id="img-list"><div class="col-md-4"><?php echo $this->Form->input("image.", array("type" => "file", "multiple","class"=>"form-control input-md","required"=>false)); ?></div><div class="col-md-4"><?php echo $this->Form->input("title.",array("placeholder"=>"Nhập tiêu đề","class"=>"form-control input-md","required"=>false)); ?> </div><?php echo $this->Form->input("id.",array("type"=>"hidden","class"=>"form-control input-md","required"=>false)); ?> </div><div class="col-md-4"><p  class="btn btn-warning del-img" onclick=\'myFunction(".img-list'+count+'")\'><i class="fa fa-remove"></i><span > Xóa </span></p></div></div></fieldset>');
+												 $("#insertImg").append('<fieldset id="additional-field-model"  class="img-list'+count+'" style="padding: 10px;"><div class="form-group"><div id="img-list"><div class="col-md-4"><?php echo $this->Form->input("image.", array("type" => "file", "multiple","class"=>"form-control input-md","required"=>false)); ?></div><div class="col-md-4"><?php echo $this->Form->input("title.",array("placeholder"=>"Nhập tiêu đề","class"=>"form-control input-md","required"=>false)); ?> </div><?php echo $this->Form->input("ids.",array("type"=>"hidden","class"=>"form-control input-md","required"=>false)); ?> </div><div class="col-md-4"><p  class="btn btn-warning del-img" onclick=\'myFunction(".img-list'+count+'")\'><i class="fa fa-remove"></i><span > Xóa </span></p></div></div></fieldset>');
 											});	
 										});
 										function myFunction(a) {
@@ -334,7 +334,7 @@
 												<div class="col-md-4">
 													<?php echo $this->Form->input('title.',array('placeholder'=>'Nhập tiêu đề','class'=>'form-control input-md','required'=>false,'value'=> $item['Picture']['title'])); ?> 
 												</div>
-												<?php echo $this->Form->input("id.",array("type"=>"hidden","class"=>"form-control input-md","required"=>false,"value"=> $item["Picture"]["id"])); ?> 
+												<?php echo $this->Form->input("ids.",array("type"=>"hidden","class"=>"form-control input-md","required"=>false,"value"=> $item["Picture"]["id"])); ?> 
 												 
 												</div>	
 												<div class="col-md-4">
@@ -355,7 +355,7 @@
 										<div class="col-md-offset-3 col-md-9">
 											<button class="btn btn-info" type="submit">
 												<i class="ace-icon fa fa-check bigger-110"></i>
-												Thêm mới
+												Sửa mới
 											</button>
 										</div>
 									</div>
@@ -370,7 +370,7 @@
 										$(document).ready(function(){
 											$(".btn-success").click(function(){
 												count1++;
-												 $("#insertImgs").append('<fieldset id="additional-field-model"  class="img-lists'+count1+'" style="padding: 10px;"><div class="form-group"><div id="img-list"><div class="col-md-4"><?php echo $this->Form->input("image1.", array("type" => "file", "multiple","class"=>"form-control input-md","required"=>false)); ?></div><div class="col-md-4"><?php echo $this->Form->input("title1.",array("placeholder"=>"Nhập tiêu đề","class"=>"form-control input-md","required"=>false)); ?> </div><?php echo $this->Form->input("id1.",array("type"=>"hidden","class"=>"form-control input-md","required"=>false)); ?> </div><div class="col-md-4"><p  class="btn btn-warning del-img" onclick=\'myFunction2(".img-lists'+count1+'")\'><i class="fa fa-remove"></i><span > Xóa </span></p></div></div></fieldset>');
+												 $("#insertImgs").append('<fieldset id="additional-field-model"  class="img-lists'+count1+'" style="padding: 10px;"><div class="form-group"><div id="img-list"><div class="col-md-4"><?php echo $this->Form->input("image1.", array("type" => "file", "multiple","class"=>"form-control input-md","required"=>false)); ?></div><div class="col-md-4"><?php echo $this->Form->input("title1.",array("placeholder"=>"Nhập tiêu đề","class"=>"form-control input-md","required"=>false)); ?> </div><?php echo $this->Form->input("ids1.",array("type"=>"hidden","class"=>"form-control input-md","required"=>false)); ?> </div><div class="col-md-4"><p  class="btn btn-warning del-img" onclick=\'myFunction2(".img-lists'+count1+'")\'><i class="fa fa-remove"></i><span > Xóa </span></p></div></div></fieldset>');
 											});	
 										});
 										function myFunction2(a) {
@@ -409,7 +409,7 @@
 												<div class="col-md-4">
 													<?php echo $this->Form->input('title1.',array('placeholder'=>'Nhập tiêu đề','class'=>'form-control input-md','required'=>false,'value'=> $item['Picture']['title'])); ?> 
 												</div>
-												<?php echo $this->Form->input("id1.",array("type"=>"hidden","class"=>"form-control input-md","required"=>false,"value"=> $item["Picture"]["id"])); ?> 
+												<?php echo $this->Form->input("ids1.",array("type"=>"hidden","class"=>"form-control input-md","required"=>false,"value"=> $item["Picture"]["id"])); ?> 
 												 
 												</div>	
 												<div class="col-md-4">
@@ -430,7 +430,7 @@
 										<div class="col-md-offset-3 col-md-9">
 											<button class="btn btn-info" type="submit">
 												<i class="ace-icon fa fa-check bigger-110"></i>
-												Thêm mới
+												Sửa mới
 											</button>
 										</div>
 									</div>
@@ -439,7 +439,7 @@
 
 										<div id="dropdown15" class="tab-pane">
 											<div class="container" >						
-												<h5>Thêm thuộc tính sản phẩm</h5>
+												<h5>Sửa thuộc tính sản phẩm</h5>
 												<div id="bs-ml-treetable" class="treetable">
 													Loading ...
 												</div>
@@ -450,7 +450,7 @@
 												<div class="col-md-offset-3 col-md-9">
 													<button class="btn btn-info" type="submit">
 														<i class="ace-icon fa fa-check bigger-110"></i>
-														Thêm mới
+														Sửa mới
 													</button>
 												</div>
 											</div>
@@ -479,7 +479,6 @@
 		var data1=[];
 		var data2=[];
 		var dem=<?php echo $technique;?>;
-		alert(dem);
 
 
 		$("#bs-ml-treetable").bstreetable({
@@ -492,14 +491,14 @@
 		},
 		noderemoveCallback:function(data,callback){
 			data2.push(data);
-			alert(data2);
+			//alert(data2);
 			$("#tech").val(data2);
 			//do your things then callback
 			callback();
 		},
 		nodeupdateCallback:function(data,callback){
 			data1.push(data);
-			alert(JSON.stringify(data1));
+			//alert(JSON.stringify(data1));
 			$("#techniques").val(JSON.stringify(data1));
 			//do your things then callback
 			callback();

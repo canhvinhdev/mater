@@ -138,8 +138,8 @@ class ProductsController extends AppController {
 			         {
 			          $filename = '/uploads/furniture/' .$result['filename'];
 			          $this->Picture->create();
-			          if( isset($image['id'][$i]) && !empty($image['id'][$i]) ){
-			          	 $this->request->data['Picture']['id']= $image['id'][$i];
+			          if( isset($image['ids'][$i]) && !empty($image['ids'][$i]) ){
+			          	 $this->request->data['Picture']['id']= $image['ids'][$i];
 
 			          }
 			          $this->request->data['Picture']['image'] = $filename;	
@@ -166,8 +166,8 @@ class ProductsController extends AppController {
 			         {
 			          $filename = '/uploads/furniture/' .$result['filename'];
 			          $this->Picture->create();
-			          if( isset($image['id1'][$i]) && !empty($image['id1'][$i]) ){
-			          	 $this->request->data['Picture']['id']= $image['id1'][$i];
+			          if( isset($image['ids1'][$i]) && !empty($image['ids1'][$i]) ){
+			          	 $this->request->data['Picture']['id']= $image['ids1'][$i];
 
 			          }
 			          $this->request->data['Picture']['image'] = $filename;	
@@ -190,6 +190,10 @@ class ProductsController extends AppController {
 			throw new NotFoundException(__('Invalid product'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+
+			 $this->request->data['Product']['id']=$id;
+			 $this->Product->save($this->request->data);
+
 			 $this->loadModel('Picture');
 			//pr($this->request->data);die();
 			$ids=$this->request->data['Product'];
@@ -228,8 +232,7 @@ class ProductsController extends AppController {
 				}
 
 			 }
-			 
-			 $this->Product->save($this->request->data);
+			$this->Session->setFlash(__('Sửa sản phẩm thành công.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 			 return $this->redirect(array('action' => 'admin_list_product'));
 			
 		} else {
@@ -288,6 +291,12 @@ class ProductsController extends AppController {
 			throw new NotFoundException(__('Invalid product'));
 		}
 		if ($this->Product->delete()) {
+			$this->loadModel('Technique');
+			$this->Technique->deleteAll(array('Technique.product_id' => $id), false);
+
+			$this->loadModel('Picture');
+			$this->Picture->deleteAll(array('Picture.product_id' => $id), false);
+
 			$this->Session->setFlash(__('Xóa sản phẩm thành công.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 		} else {
 			$this->Session->setFlash(__('Xóa sản phẩm thất bại.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');

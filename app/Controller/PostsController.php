@@ -52,9 +52,9 @@ class PostsController extends AppController {
  * @return void
  */
 	public function view($slug_cat= null,$slug_post= null,$id = null) {
-		$options = array('conditions' => array('Post.' . $this->Post->primaryKey => $id));
-		$this->set('post', $this->Post->find('first', $options));
-		$this->set('title_for_layout', $this->Post->find('first', $options)['Post']['title']);
+		 $options = array('conditions' => array('Post.' . $this->Post->primaryKey => $id));
+		 $this->set('post', $this->Post->find('first', $options));
+		 $this->set('title_for_layout', $this->Post->find('first', $options)['Post']['title']);
 	}
 
 /**
@@ -78,7 +78,7 @@ class PostsController extends AppController {
 				$this->Session->setFlash(__('Lưu bài viêt thất bại.'), 'default', array('id' => 'flashMessage', 'class' => 'alert alert-success'), 'message');
 			}
 		}
-		$categories = $this->Post->Category->find('list');
+		$categories = $this->Post->Category->find('list',array('conditions' => array('Category.type'=> 1)));
 		$users = $this->Post->User->find('list');
 		$this->set(compact('categories', 'users'));
 
