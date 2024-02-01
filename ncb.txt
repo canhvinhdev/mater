@@ -1,18 +1,14 @@
-wget --quiet --output-document - \
-  --header="Content-Type: text/xml;charset=UTF-8" \
-  --post-data "$(cat <<'EOF'
-<?xml version="1.0" encoding="UTF-8"?>
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cic="http://www.endpoint.ws.h2h.cic.org.vn/cicauthen">
-  <soapenv:Header/>
-  <soapenv:Body>
-    <cic:DoiMatKhau>
-      <cic:TenDangNhap>h352quangh2huat</cic:TenDangNhap>
-      <cic:MatKhauCu>fL7I&amp;voOsd</cic:MatKhauCu>
-      <cic:MatKhauMoi>123Abc@123</cic:MatKhauMoi>
-    </cic:DoiMatKhau>
-  </soapenv:Body>
-</soapenv:Envelope>
-EOF
-)" \
-  https://192.168.10.6:443/ServiceGatewayApp/service/authen
-
+curl -v --request POST --header "Content-Type: text/xml;charset=UTF-8" \
+--data \
+'<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cic="http://www.endpoint.ws.h2h.cic.org.vn/cicauthen"> \
+  <soapenv:Header/> \
+  <soapenv:Body> \
+    <cic:DoiMatKhau> \
+      <cic:TenDangNhap>h352quangh2huat</cic:TenDangNhap> \
+      <cic:MatKhauCu>fL7I&voOsd</cic:MatKhauCu> \
+      <cic:MatKhauMoi>123Abc@123</cic:MatKhauMoi> \
+    </cic:DoiMatKhau> \
+  </soapenv:Body> \
+</soapenv:Envelope>' \
+https://192.168.10.6:443/ServiceGatewayApp/service/authen
