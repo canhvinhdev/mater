@@ -1,0 +1,1 @@
+ldapsearch -x -LLL -h 10.1.33.19 -p 389 -D "cn=ldap.icredit,dc=ncb-bank,dc=ncb,dc=corp" -w ,q0w[19mHFN_ -b "dc=ncb-bank,dc=ncb,dc=corp" -s sub "(objectClass=thuongtv.os)" givenName
