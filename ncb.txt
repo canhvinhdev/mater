@@ -1,1 +1,1 @@
-ldapsearch -x -LLL -h 10.1.33.19 -p 389 -D "CN=LDAP iCredit,OU=User LDAP,OU=NCB,DC=ncb-bank,DC=ncb,DC=corp" -w password -b "OU=User LDAP,OU=NCB,DC=ncb-bank,DC=ncb,DC=corp" -s sub "(objectClass=thuongtv.os)" givenName
+[{"cn":"cn","host":"10.1.33.19","port":"389","user":"CN=LDAP iCredit,OU=User LDAP,OU=NCB,DC=ncb-bank,DC=ncb,DC=corp","pass":"admin","base":"OU=User LDAP,OU=NCB,DC=ncb-bank,DC=ncb,DC=corp","attributeName":"sn"}]
