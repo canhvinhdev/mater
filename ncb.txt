@@ -11,4 +11,4 @@ curl -v --request POST --header "Content-Type: text/xml;charset=UTF-8" \
     </cic:DoiMatKhau> \
   </soapenv:Body> \
 </soapenv:Envelope>' \
-https://192.168.10.6:443/ServiceGatewayApp/service/authen
+https://192.168.10.6:443/ServiceGatewayApp/service/cicUserInfo
