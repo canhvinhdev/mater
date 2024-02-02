@@ -1,0 +1,14 @@
+curl -X POST \
+  -H "Content-Type: text/xml" \
+  -H "SOAPAction: http://www.endpoint.ws.h2h.cic.org.vn/cicauthen/DangNhap" \
+  --data '<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cic="http://www.endpoint.ws.h2h.cic.org.vn/cicauthen">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cic:DangNhap>
+         <cic:TenDangNhap>ntthi</cic:TenDangNhap>
+         <cic:MatKhau>Ab@123456</cic:MatKhau>
+      </cic:DangNhap>
+   </soapenv:Body>
+</soapenv:Envelope>' \
+  http://www.endpoint.ws.h2h.cic.org.vn/cicauthen
